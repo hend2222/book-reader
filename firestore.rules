@@ -1,0 +1,79 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function isAdmin() {
+      return signedIn() && (
+        request.auth.uid == "LNghcfytsiU2x627gt4iAzPFaFH3" ||
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == "admin" ||
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin == true
+      );
+    }
+
+    match /books/{bookId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /categories/{categoryId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /users/{uid} {
+      allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
+      allow create, update: if signedIn() && request.auth.uid == uid;
+      allow delete: if isAdmin();
+
+      /* Bedtime gratitude journal archive (private to the child + creator) */
+      match /journal/{entryId} {
+        allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
+        allow create: if signedIn() && request.auth.uid == uid
+                      && request.resource.data.text is string
+                      && request.resource.data.text.size() > 0
+                      && request.resource.data.text.size() <= 600;
+        allow update, delete: if isAdmin();
+      }
+    }
+
+    /* Weekly Reading Champions: one log entry per reader / book / week */
+    match /readingLog/{logId} {
+      allow read: if true;
+      allow create: if signedIn() && request.resource.data.uid == request.auth.uid;
+      allow update, delete: if isAdmin();
+    }
+
+    /* Gallery: anyone may submit a pending drawing; only admins publish,
+       moderate or remove. Likes may increment the counter. */
+    match /gallery/{drawingId} {
+      allow read: if true;
+      allow create: if request.resource.data.status == "pending"
+                    && request.resource.data.keys().hasAll(["childName", "imageUrl", "status"]);
+      allow update: if isAdmin()
+                    || (request.resource.data.diff(resource.data).affectedKeys().hasOnly(["likes"]));
+      allow delete: if isAdmin();
+    }
+
+    /* Monthly book club selection + family reflections */
+    match /site/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /bookClubReflections/{reflectionId} {
+      allow read: if true;
+      allow create: if request.resource.data.text is string
+                    && request.resource.data.text.size() > 0
+                    && request.resource.data.text.size() <= 500
+                    && request.resource.data.name is string
+                    && request.resource.data.name.size() <= 60;
+      allow update, delete: if isAdmin();
+    }
+
+    match /contactMessages/{messageId} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+  }
+}

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="dw-theme.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DreamWings | Little Artists Gallery</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&family=Playfair+Display:ital,wght@0,600;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="library.style.css">
+<link rel="stylesheet" href="reader-profile.css">
+<link rel="stylesheet" href="dw-advanced.css">
+<link rel="icon" type="image/svg+xml" href="dw-logo.svg">
+<link rel="stylesheet" href="dw-theme.css">
+</head>
+<body>
+
+<header class="navbar transparent-nav">
+  <div class="logo">
+    <div class="logo-icon-bg dw-logo-wrap"><img src="dw-logo.svg" alt="DreamWings" class="dw-logo-img"></div>
+    <span>DreamWings</span>
+  </div>
+
+  <nav class="nav-links">
+    <a href="home.html">Home</a>
+    <a href="library.html">Library</a>
+    <a href="gallery.html" class="active">Gallery</a>
+    <a href="about.html">About Me</a>
+    <a href="contact.html">Contact Us</a>
+  </nav>
+
+  <div class="nav-actions">
+    <a href="favorite.html" class="fav-btn" data-requires-auth="true" title="Favorites" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;">
+      <i class="fa-solid fa-star"></i>
+    </a>
+    <div id="auth-container" style="display:inline-flex;align-items:center;">
+      <a href="login.html" class="login-btn" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px">
+        <i class="fa-brands fa-google"></i><span>Sign In</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<section class="dw-page-hero">
+  <div class="dw-kicker"><i class="fa-solid fa-palette"></i><span>Young Artists Community</span></div>
+  <h1>Little Artists Gallery 🎨</h1>
+  <p>A magical space celebrating our young readers' creative drawings and imagination!</p>
+  <div style="margin-top:22px;">
+    <button type="button" id="openSubmitModalBtn" class="dw-btn dw-btn-gold">
+      <i class="fa-solid fa-cloud-arrow-up"></i><span>Submit Your Child's Drawing</span>
+    </button>
+  </div>
+</section>
+
+<main class="container">
+  <p class="dw-help" style="text-align:center;margin:0 0 18px;">
+    <i class="fa-solid fa-shield-heart" style="color:#f5a623"></i>
+    <span>This gallery shows drawings approved by the DreamWings team.</span>
+  </p>
+
+  <div id="contestBanner"></div>
+
+  <div class="dw-gallery-grid" id="galleryGrid" aria-live="polite"></div>
+</main>
+
+<!-- lightbox -->
+<div class="dw-lightbox" id="lightboxModal" role="dialog" aria-modal="true">
+  <button class="dw-icon-btn dw-lightbox-close" type="button" id="closeLightboxBtn" aria-label="Close">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+  <img id="lightboxImg" src="" alt="Drawing preview">
+</div>
+
+<!-- submit modal -->
+<div class="dw-modal" id="submitModal" role="dialog" aria-modal="true">
+  <div class="dw-modal-card">
+    <div class="dw-modal-head">
+      <h2><i class="fa-solid fa-palette"></i><span>Submit a Drawing</span></h2>
+      <button type="button" class="dw-icon-btn" id="closeSubmitModalBtn" aria-label="Close">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <p class="dw-help" style="margin-bottom:18px;">
+      Parents: share your little adventurer's creative drawings to be proudly showcased in our community gallery!
+    </p>
+
+    <form id="submitDrawingForm" novalidate>
+      <div class="dw-grid-2">
+        <div class="dw-field">
+          <label class="dw-label" for="childNameInput">Child's Name</label>
+          <input class="dw-input" type="text" id="childNameInput" required maxlength="60" placeholder="e.g. Maya">
+        </div>
+        <div class="dw-field">
+          <label class="dw-label" for="childAgeInput">Child's Age</label>
+          <input class="dw-input" type="number" id="childAgeInput" required min="3" max="14" placeholder="e.g. 6">
+        </div>
+      </div>
+
+      <div class="dw-field">
+        <label class="dw-label" for="inspiredStoryInput">Story that Inspired it</label>
+        <input class="dw-input" type="text" id="inspiredStoryInput" maxlength="90" placeholder="e.g. Benny Bear">
+      </div>
+
+      <div class="dw-field">
+        <label class="dw-label" for="drawingFileInput">Drawing Picture</label>
+        <label class="dw-drop" id="drawingDrop">
+          <input type="file" id="drawingFileInput" accept="image/jpeg,image/png,image/webp" required>
+          <i class="fa-solid fa-image" style="font-size:22px;color:#ffd88a;"></i>
+          <span>Drop files here or click to browse</span>
+          <span class="dw-help">JPG, PNG or WebP · up to 8 MB</span>
+        </label>
+        <img id="drawingPreview" class="dw-preview" alt="" style="margin-top:12px;">
+      </div>
+
+      <div class="dw-field">
+        <label class="dw-label" for="drawingNote">A little note (optional)</label>
+        <textarea class="dw-textarea" id="drawingNote" rows="2" maxlength="240" placeholder="Tell us about the story behind the drawing…"></textarea>
+      </div>
+
+      <p class="dw-help" id="submitStatus" aria-live="polite"></p>
+
+      <button type="submit" class="dw-btn dw-btn-gold" id="submitDrawingBtn" style="width:100%;">
+        <i class="fa-solid fa-paper-plane"></i><span>Send to DreamWings</span>
+      </button>
+    </form>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container footer-content">
+    <div class="footer-col">
+      <h3>DreamWings</h3>
+      <p>Magical stories narrated with love to inspire young hearts and minds.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="home.html">Home</a>
+      <a href="library.html">Library</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="book-club.html">Book Club</a>
+      <a href="about.html">About Me</a>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <div class="social-icons">
+        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 DreamWings. All rights reserved. Designed with 🧡 by Hind.</p>
+  </div>
+</footer>
+
+<script type="module" src="i18n.js"></script>
+<script type="module" src="auth-state.js"></script>
+<script type="module" src="favorites.js"></script>
+<script type="module" src="notifications.js"></script>
+<script type="module" src="access-control.js"></script>
+<script type="module" src="gallery.js"></script>
+</body>
+</html>

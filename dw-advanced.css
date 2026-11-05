@@ -1,0 +1,1699 @@
+/* ============================================================
+   DreamWings — v10 advanced UI
+   Deep browns • gold foil • warm cream
+   Shared by library search, gallery, book club,
+   certificates and the creator control panel.
+   ============================================================ */
+
+:root {
+  --dw-brown-900: #1d110e;
+  --dw-brown-800: #2b1a15;
+  --dw-brown-700: #3a241d;
+  --dw-brown-600: #4a2f25;
+  --dw-brown-500: #5c3a2b;
+  --dw-gold-500: #f5a623;
+  --dw-gold-400: #d99a45;
+  --dw-gold-300: #ffd88a;
+  --dw-gold-200: #ffe9c2;
+  --dw-cream-100: #fcf7ee;
+  --dw-cream-200: #f7eedd;
+  --dw-ink: #321e16;
+  --dw-muted: #d9c4b6;
+  --dw-line: rgba(223, 162, 85, 0.28);
+  --dw-radius: 22px;
+  --dw-shadow: 0 18px 44px rgba(0, 0, 0, 0.42);
+}
+
+/* ---------- shared atoms ---------- */
+
+.dw-page-hero {
+  padding: 150px 20px 26px;
+  text-align: center;
+  position: relative;
+  z-index: 5;
+}
+
+.dw-page-hero h1 {
+  margin: 10px 0 8px;
+  font: 700 clamp(28px, 4.4vw, 44px)/1.15 "Fredoka", "Tajawal", sans-serif;
+  color: var(--dw-gold-200);
+  letter-spacing: 0.3px;
+  text-shadow: 0 4px 22px rgba(245, 166, 35, 0.28);
+}
+
+.dw-page-hero p {
+  margin: 0 auto;
+  max-width: 680px;
+  color: var(--dw-muted);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.dw-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(245, 166, 35, 0.45);
+  background: rgba(245, 166, 35, 0.12);
+  color: var(--dw-gold-300);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+html[dir="rtl"] .dw-kicker {
+  letter-spacing: 0;
+  font-size: 12px;
+}
+
+.dw-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  font: 700 14px/1 "Quicksand", "Tajawal", sans-serif;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.dw-btn:hover { transform: translateY(-2px); }
+.dw-btn:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+
+.dw-btn-gold {
+  background: linear-gradient(135deg, #f7c471, #e79a33 55%, #c9761c);
+  color: #2b1612;
+  border-color: #ffe3a9;
+  box-shadow: 0 10px 24px rgba(245, 166, 35, 0.32);
+}
+
+.dw-btn-ghost {
+  background: rgba(58, 36, 29, 0.72);
+  color: var(--dw-gold-200);
+  border-color: rgba(223, 162, 85, 0.55);
+}
+
+.dw-btn-ghost:hover {
+  background: rgba(88, 56, 44, 0.9);
+  border-color: var(--dw-gold-300);
+}
+
+.dw-btn-soft {
+  background: rgba(245, 166, 35, 0.14);
+  color: var(--dw-gold-300);
+  border-color: rgba(245, 166, 35, 0.35);
+}
+
+.dw-card {
+  background: linear-gradient(150deg, rgba(58, 36, 29, 0.94), rgba(31, 20, 17, 0.97));
+  border: 1.5px solid var(--dw-line);
+  border-radius: var(--dw-radius);
+  box-shadow: var(--dw-shadow);
+}
+
+.dw-label {
+  display: block;
+  margin: 0 0 7px;
+  color: var(--dw-gold-200);
+  font: 700 13px/1.4 "Quicksand", "Tajawal", sans-serif;
+}
+
+.dw-input,
+.dw-select,
+.dw-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 15px;
+  border-radius: 13px;
+  border: 1px solid rgba(223, 162, 85, 0.42);
+  background: rgba(20, 13, 11, 0.85);
+  color: #fff5e8;
+  font: 500 14px/1.6 "Quicksand", "Tajawal", sans-serif;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.dw-input::placeholder,
+.dw-textarea::placeholder { color: #b79c8d; }
+
+.dw-input:focus,
+.dw-select:focus,
+.dw-textarea:focus {
+  border-color: var(--dw-gold-500);
+  box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.18);
+}
+
+.dw-textarea { resize: vertical; line-height: 1.75; }
+
+.dw-help {
+  margin: 6px 0 0;
+  color: #c9b3a4;
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+
+.dw-field { margin-bottom: 15px; }
+
+.dw-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 14px;
+}
+
+.dw-muted { color: #bfa797; }
+.dw-gold { color: var(--dw-gold-300); }
+
+.dw-hidden { display: none !important; }
+
+/* ---------- toast offset so the language switch never covers it ---------- */
+
+.dw-lang-switch { margin-inline-end: 2px; }
+
+/* ============================================================
+   LIBRARY — smart search results
+   ============================================================ */
+
+.dw-results-section {
+  max-width: 1120px;
+  margin: 0 auto 30px;
+  padding: 0 20px;
+}
+
+.dw-results-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 8px 0 18px;
+}
+
+.dw-results-head h2 {
+  margin: 0;
+  font: 600 1.35rem "Fredoka", "Tajawal", sans-serif;
+  color: var(--dw-gold-300);
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.dw-results-count {
+  color: #cbb5a6;
+  font-size: 13px;
+}
+
+.dw-search-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 26px 22px;
+  padding: 6px 0 20px;
+}
+
+.dw-result-card {
+  position: relative;
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.dw-result-card:hover { transform: translateY(-7px); }
+
+.dw-result-cover {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  border-radius: 6px 12px 12px 6px;
+  overflow: hidden;
+  background: linear-gradient(145deg, #6b422b, #2f1c15);
+  border: 1px solid rgba(245, 166, 35, 0.5);
+  box-shadow: 0 14px 26px rgba(0, 0, 0, 0.55);
+}
+
+.dw-result-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.dw-result-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.42), transparent 22%);
+  pointer-events: none;
+}
+
+.dw-result-title {
+  margin: 11px 2px 3px;
+  font: 700 0.98rem/1.35 "Fredoka", "Tajawal", sans-serif;
+  color: #ffe8c4;
+}
+
+.dw-result-author {
+  color: #c3aa99;
+  font-size: 0.8rem;
+}
+
+.dw-result-badge {
+  position: absolute;
+  top: 10px;
+  inset-inline-end: 10px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(20, 12, 10, 0.82);
+  border: 1px solid rgba(255, 216, 138, 0.4);
+  color: var(--dw-gold-300);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+
+.dw-suggest-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.dw-suggest-chip {
+  border: 1px dashed rgba(223, 162, 85, 0.45);
+  background: transparent;
+  color: #e7cdb6;
+  border-radius: 999px;
+  padding: 6px 13px;
+  font: 600 12px "Quicksand", "Tajawal", sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dw-suggest-chip:hover {
+  background: rgba(245, 166, 35, 0.15);
+  border-style: solid;
+  color: #fff;
+}
+
+/* ============================================================
+   GALLERY
+   ============================================================ */
+
+.dw-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(265px, 1fr));
+  gap: 26px;
+  margin: 10px auto 70px;
+}
+
+.dw-art-card {
+  background: linear-gradient(150deg, rgba(58, 36, 29, 0.94), rgba(32, 20, 17, 0.97));
+  border: 1.5px solid rgba(245, 166, 35, 0.35);
+  border-radius: 20px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dw-art-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--dw-gold-500);
+  box-shadow: 0 20px 40px rgba(245, 166, 35, 0.2);
+}
+
+.dw-art-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 13px;
+  overflow: hidden;
+  background: #170f0c;
+  border: 2px solid rgba(223, 162, 85, 0.3);
+  cursor: zoom-in;
+}
+
+.dw-art-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.45s ease;
+}
+
+.dw-art-card:hover .dw-art-frame img { transform: scale(1.05); }
+
+.dw-art-zoom {
+  position: absolute;
+  bottom: 9px;
+  inset-inline-end: 9px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.65);
+  color: var(--dw-gold-300);
+  font-size: 10.5px;
+  font-weight: 700;
+  backdrop-filter: blur(4px);
+}
+
+.dw-art-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.dw-art-name {
+  margin: 0;
+  font: 600 1.1rem "Fredoka", "Tajawal", sans-serif;
+  color: #ffe3ae;
+}
+
+.dw-art-age {
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(245, 166, 35, 0.16);
+  border: 1px solid rgba(245, 166, 35, 0.38);
+  color: #ffcf73;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.dw-art-story {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #d3bda9;
+  font-size: 0.86rem;
+}
+
+.dw-art-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(223, 162, 85, 0.25);
+  color: #b9a294;
+  font-size: 0.8rem;
+}
+
+.dw-star-react {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 13px;
+  border-radius: 999px;
+  border: 1px solid rgba(245, 166, 35, 0.4);
+  background: rgba(245, 166, 35, 0.12);
+  color: var(--dw-gold-300);
+  font: 700 12.5px "Quicksand", "Tajawal", sans-serif;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dw-star-react:hover,
+.dw-star-react.is-on {
+  background: var(--dw-gold-500);
+  color: #2b1612;
+  transform: scale(1.04);
+}
+
+/* modal + lightbox */
+.dw-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(12, 8, 7, 0.86);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  overflow-y: auto;
+}
+
+.dw-modal.is-open { display: flex; }
+
+.dw-modal-card {
+  width: min(540px, 100%);
+  max-height: 92vh;
+  overflow: auto;
+  margin: auto;
+  padding: 28px;
+  border-radius: 24px;
+  border: 1.5px solid rgba(238, 177, 92, 0.55);
+  background: linear-gradient(150deg, #3a241d, #201412);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+  color: #fff2e3;
+}
+
+.dw-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.dw-modal-head h2 {
+  margin: 0;
+  font: 600 1.4rem "Fredoka", "Tajawal", sans-serif;
+  color: var(--dw-gold-300);
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.dw-icon-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--dw-gold-300);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+}
+
+.dw-icon-btn:hover { background: rgba(245, 166, 35, 0.2); }
+
+.dw-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 2100;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+  background: rgba(10, 6, 5, 0.94);
+  backdrop-filter: blur(8px);
+}
+
+.dw-lightbox.is-open { display: flex; }
+
+.dw-lightbox img {
+  max-width: min(92vw, 1100px);
+  max-height: 86vh;
+  border-radius: 16px;
+  border: 2px solid var(--dw-gold-500);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8);
+  object-fit: contain;
+}
+
+.dw-lightbox-close {
+  position: absolute;
+  top: 20px;
+  inset-inline-end: 22px;
+}
+
+.dw-drop {
+  position: relative;
+  display: grid;
+  place-items: center;
+  gap: 8px;
+  padding: 26px 18px;
+  border: 1.6px dashed rgba(245, 166, 35, 0.45);
+  border-radius: 16px;
+  background: rgba(245, 166, 35, 0.06);
+  color: #d8bfa9;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dw-drop:hover,
+.dw-drop.is-drag {
+  border-color: var(--dw-gold-500);
+  background: rgba(245, 166, 35, 0.13);
+  color: #fff;
+}
+
+.dw-drop input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.dw-preview {
+  max-width: 100%;
+  max-height: 190px;
+  border-radius: 12px;
+  border: 1px solid rgba(223, 162, 85, 0.4);
+  display: none;
+}
+
+.dw-preview.is-visible { display: block; }
+
+
+/* ============================================================
+   BOOK CLUB
+   ============================================================ */
+
+.dw-club-banner {
+  display: grid;
+  grid-template-columns: minmax(180px, 260px) 1fr;
+  gap: 32px;
+  align-items: center;
+  padding: 28px;
+  margin: 10px auto 34px;
+  border-radius: 26px;
+  border: 1.5px solid rgba(245, 166, 35, 0.45);
+  background:
+    radial-gradient(circle at 8% 20%, rgba(245, 166, 35, 0.18), transparent 45%),
+    linear-gradient(150deg, #3c2620, #221512);
+  box-shadow: var(--dw-shadow);
+}
+
+.dw-club-cover {
+  aspect-ratio: 2 / 3;
+  border-radius: 8px 16px 16px 8px;
+  overflow: hidden;
+  border: 2px solid rgba(245, 166, 35, 0.55);
+  box-shadow: -8px 14px 28px rgba(0, 0, 0, 0.6);
+  background: linear-gradient(145deg, #6b422b, #2f1c15);
+}
+
+.dw-club-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.dw-club-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(245, 166, 35, 0.16);
+  border: 1px solid rgba(245, 166, 35, 0.45);
+  color: var(--dw-gold-300);
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+html[dir="rtl"] .dw-club-badge { letter-spacing: 0; }
+
+.dw-club-title {
+  margin: 14px 0 10px;
+  font: 700 clamp(1.5rem, 3.4vw, 2.1rem)/1.25 "Playfair Display", "Tajawal", serif;
+  color: #fff0d4;
+}
+
+.dw-club-desc {
+  margin: 0 0 16px;
+  color: #dcc6b6;
+  line-height: 1.8;
+}
+
+.dw-moral-box {
+  padding: 16px 18px;
+  border-radius: 16px;
+  border: 1px dashed rgba(245, 166, 35, 0.4);
+  background: rgba(245, 166, 35, 0.08);
+  margin: 0 0 18px;
+}
+
+.dw-moral-box h4 {
+  margin: 0 0 6px;
+  color: var(--dw-gold-300);
+  font: 700 12px/1 "Quicksand", "Tajawal", sans-serif;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
+
+html[dir="rtl"] .dw-moral-box h4 { letter-spacing: 0; }
+
+.dw-moral-box p { margin: 0; color: #f0ddcb; line-height: 1.7; }
+
+.dw-question-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin: 18px 0 30px;
+}
+
+.dw-question-card {
+  display: flex;
+  gap: 13px;
+  padding: 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(223, 162, 85, 0.3);
+  background: rgba(58, 36, 29, 0.72);
+}
+
+.dw-question-num {
+  flex: 0 0 30px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #f7c471, #d4832a);
+  color: #2b1612;
+  font: 800 13px "Quicksand", sans-serif;
+}
+
+.dw-question-text { margin: 2px 0 0; color: #f2e0d0; line-height: 1.7; }
+
+.dw-reflections { display: grid; gap: 12px; margin-top: 18px; }
+
+.dw-reflection {
+  padding: 15px 18px;
+  border-radius: 14px;
+  background: rgba(44, 27, 22, 0.8);
+  border: 1px solid rgba(223, 162, 85, 0.22);
+}
+
+.dw-reflection-author {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--dw-gold-300);
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.dw-reflection-body { margin: 0; color: #e6d3c5; line-height: 1.75; font-size: 0.94rem; }
+
+/* ============================================================
+   CERTIFICATE
+   ============================================================ */
+
+.dw-cert-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 18px;
+  margin: 0 auto 26px;
+  max-width: 760px;
+  border-radius: 20px;
+  border: 1px solid rgba(223, 162, 85, 0.35);
+  background: rgba(43, 26, 21, 0.75);
+}
+
+.dw-cert-progress {
+  max-width: 560px;
+  margin: 0 auto 30px;
+  text-align: center;
+  color: #e0c9b8;
+  font-size: 13.5px;
+}
+
+.dw-cert-progress-track {
+  height: 9px;
+  margin-top: 9px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.dw-cert-progress-fill {
+  height: 100%;
+  width: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #e59849, #ffd88a);
+  transition: width 0.5s ease;
+}
+
+.dw-cert-shell {
+  padding: 0 18px 70px;
+  display: grid;
+  place-items: center;
+}
+
+.dw-certificate {
+  position: relative;
+  width: min(980px, 100%);
+  aspect-ratio: 1.414 / 1;
+  padding: clamp(26px, 4.4vw, 52px);
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(245, 166, 35, 0.14), transparent 55%),
+    linear-gradient(160deg, #fffdf7 0%, #fdf6e8 55%, #f7ecd7 100%);
+  color: #4a2c17;
+  border: 10px solid #7a4a24;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55), inset 0 0 0 3px #caa162;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.dw-certificate::before {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  border: 1.5px solid rgba(160, 106, 52, 0.45);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.dw-cert-corner {
+  position: absolute;
+  width: 54px;
+  height: 54px;
+  border: 2px solid #b98545;
+  opacity: 0.8;
+}
+
+.dw-cert-corner.tl { top: 26px; left: 26px; border-right: 0; border-bottom: 0; }
+.dw-cert-corner.tr { top: 26px; right: 26px; border-left: 0; border-bottom: 0; }
+.dw-cert-corner.bl { bottom: 26px; left: 26px; border-right: 0; border-top: 0; }
+.dw-cert-corner.br { bottom: 26px; right: 26px; border-left: 0; border-top: 0; }
+
+.dw-cert-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font: 700 12px/1 "Quicksand", "Tajawal", sans-serif;
+  letter-spacing: 2.6px;
+  text-transform: uppercase;
+  color: #9a5a24;
+}
+
+html[dir="rtl"] .dw-cert-brand { letter-spacing: 0; }
+
+.dw-cert-logo {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #f3c37a, #cf7f24);
+  color: #3a2412;
+  font-size: 17px;
+}
+
+.dw-cert-title {
+  margin: 14px 0 2px;
+  font: 700 clamp(1.6rem, 3.6vw, 2.7rem)/1.1 "Cinzel", "Playfair Display", "Tajawal", serif;
+  color: #7a3f16;
+  letter-spacing: 1.2px;
+}
+
+html[dir="rtl"] .dw-cert-title { letter-spacing: 0; }
+
+.dw-cert-sub {
+  margin: 0 0 14px;
+  font: italic 500 clamp(0.85rem, 1.5vw, 1.05rem) "Playfair Display", "Tajawal", serif;
+  color: #a56a30;
+}
+
+.dw-cert-lead { margin: 0; color: #6b4a2c; font-size: clamp(0.8rem, 1.2vw, 0.95rem); }
+
+.dw-cert-name {
+  margin: 10px 0 12px;
+  padding: 0 10px 8px;
+  min-width: 40%;
+  font: 700 clamp(1.7rem, 4.4vw, 3rem)/1.15 "Playfair Display", "Tajawal", serif;
+  color: #5f2f0e;
+  border-bottom: 2px solid rgba(160, 106, 52, 0.55);
+  letter-spacing: 1px;
+}
+
+.dw-cert-body {
+  max-width: 640px;
+  margin: 0 auto;
+  color: #6d4a2b;
+  font-size: clamp(0.78rem, 1.15vw, 0.92rem);
+  line-height: 1.8;
+}
+
+.dw-cert-stats {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 14px 0 0;
+  padding: 7px 16px;
+  border-radius: 999px;
+  background: rgba(245, 166, 35, 0.14);
+  border: 1px solid rgba(160, 106, 52, 0.4);
+  color: #8a4c1d;
+  font: 700 12px/1 "Quicksand", "Tajawal", sans-serif;
+}
+
+.dw-cert-foot {
+  width: 100%;
+  margin-top: auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.dw-cert-sig { text-align: center; min-width: 150px; }
+
+.dw-cert-sig-line {
+  font: italic 600 1.3rem "Playfair Display", "Tajawal", serif;
+  color: #6b3a15;
+  border-bottom: 1.5px solid rgba(120, 76, 38, 0.5);
+  padding: 0 12px 5px;
+}
+
+.dw-cert-sig-label {
+  margin-top: 6px;
+  font: 700 10px/1.5 "Quicksand", "Tajawal", sans-serif;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: #96643a;
+}
+
+html[dir="rtl"] .dw-cert-sig-label { letter-spacing: 0; }
+
+.dw-cert-seal {
+  flex: 0 0 auto;
+  width: clamp(64px, 9vw, 96px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  background: radial-gradient(circle at 35% 30%, #f9d089, #c4761f 70%);
+  border: 3px solid #8a4f18;
+  box-shadow: 0 8px 18px rgba(90, 50, 15, 0.35), inset 0 0 0 4px rgba(255, 240, 200, 0.5);
+  color: #4a2508;
+  font: 800 clamp(7px, 1vw, 9.5px)/1.35 "Quicksand", "Tajawal", sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 6px;
+}
+
+.dw-cert-locked {
+  filter: grayscale(0.4) brightness(0.82);
+}
+
+.dw-cert-locked::after {
+  content: "🔒";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 54px;
+  background: rgba(20, 12, 9, 0.38);
+  backdrop-filter: blur(2px);
+}
+
+/* ---------- admin panel ---------- */
+
+.dw-admin-body { background: #17100e; }
+
+.dw-admin-shell {
+  display: grid;
+  grid-template-columns: 254px 1fr;
+  min-height: 100vh;
+}
+
+.dw-admin-side {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100vh;
+  padding: 26px 20px;
+  background: linear-gradient(180deg, #2b1a15, #1b110e);
+  border-inline-end: 1px solid rgba(223, 162, 85, 0.22);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  overflow-y: auto;
+}
+
+.dw-admin-brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font: 700 1.25rem "Fredoka", "Tajawal", sans-serif;
+  color: #ffd88a;
+  text-decoration: none;
+}
+
+/* winged book mark shared by the brand blocks */
+.dw-brand-book {
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #f6c473, #cf7f24);
+  color: #2b1612;
+  font-size: 15px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.35);
+}
+
+.dw-admin-brand .dw-brand-book { width: 40px; height: 40px; border-radius: 13px; }
+
+.dw-admin-nav { display: grid; gap: 6px; margin-top: 8px; }
+
+.dw-admin-nav button {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  padding: 11px 14px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: #d6c0b0;
+  font: 700 13.5px "Quicksand", "Tajawal", sans-serif;
+  cursor: pointer;
+  text-align: start;
+  transition: all 0.2s ease;
+}
+
+.dw-admin-nav button i { width: 18px; text-align: center; opacity: 0.85; }
+
+.dw-admin-nav button:hover { background: rgba(245, 166, 35, 0.1); color: #ffe6bd; }
+
+.dw-admin-nav button.is-active {
+  background: linear-gradient(135deg, rgba(245, 166, 35, 0.24), rgba(245, 166, 35, 0.08));
+  color: #ffdfa3;
+  box-shadow: inset 0 0 0 1px rgba(245, 166, 35, 0.3);
+}
+
+.dw-admin-user {
+  margin-top: auto;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(245, 166, 35, 0.08);
+  border: 1px solid rgba(245, 166, 35, 0.22);
+  font-size: 12px;
+  color: #d6c0b0;
+  word-break: break-word;
+}
+
+.dw-admin-user strong { display: block; color: #ffe0ab; margin-bottom: 3px; }
+
+.dw-admin-main { padding: 30px clamp(18px, 3.5vw, 42px) 70px; min-width: 0; }
+
+.dw-admin-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-bottom: 26px;
+}
+
+.dw-admin-top h1 {
+  margin: 0 0 6px;
+  font: 700 clamp(1.6rem, 2.8vw, 2.1rem) "Fredoka", "Tajawal", sans-serif;
+  color: #ffe4b3;
+}
+
+.dw-admin-top p { margin: 0; color: #bda898; font-size: 13.5px; }
+
+.dw-panel { display: none; animation: dwFade 0.35s ease both; }
+.dw-panel.is-active { display: block; }
+
+@keyframes dwFade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dw-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+  margin-bottom: 26px;
+}
+
+.dw-stat {
+  padding: 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(223, 162, 85, 0.25);
+  background: linear-gradient(150deg, rgba(58, 36, 29, 0.85), rgba(30, 19, 16, 0.95));
+}
+
+.dw-stat i { color: #f5a623; font-size: 17px; }
+.dw-stat strong { display: block; margin: 8px 0 2px; font: 700 1.7rem "Fredoka", sans-serif; color: #ffe6bd; }
+.dw-stat span { color: #b9a191; font-size: 12px; }
+
+.dw-panel-card {
+  padding: 22px;
+  border-radius: 18px;
+  border: 1px solid rgba(223, 162, 85, 0.26);
+  background: linear-gradient(150deg, rgba(52, 32, 26, 0.9), rgba(28, 18, 15, 0.96));
+  margin-bottom: 20px;
+}
+
+.dw-panel-card h2 {
+  margin: 0 0 4px;
+  font: 700 1.15rem "Fredoka", "Tajawal", sans-serif;
+  color: #ffdda6;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.dw-panel-card > p { margin: 0 0 16px; color: #bda898; font-size: 13px; }
+
+.dw-table-wrap { overflow-x: auto; }
+
+.dw-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  min-width: 620px;
+}
+
+.dw-table th {
+  text-align: start;
+  padding: 10px 12px;
+  color: #c6ad9b;
+  font: 700 11px "Quicksand", "Tajawal", sans-serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(223, 162, 85, 0.25);
+}
+
+html[dir="rtl"] .dw-table th { letter-spacing: 0; }
+
+.dw-table td {
+  padding: 11px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  color: #f1dfd1;
+  vertical-align: middle;
+}
+
+.dw-table tr:hover td { background: rgba(245, 166, 35, 0.05); }
+
+.dw-table .dw-book-cell { display: flex; align-items: center; gap: 10px; }
+
+.dw-table .dw-book-cell img {
+  width: 36px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+  border: 1px solid rgba(223, 162, 85, 0.4);
+}
+
+.dw-table .dw-row-actions { display: flex; gap: 6px; }
+
+.dw-mini-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  border: 1px solid rgba(223, 162, 85, 0.35);
+  background: rgba(245, 166, 35, 0.1);
+  color: #ffd88a;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+}
+
+.dw-mini-btn:hover { background: rgba(245, 166, 35, 0.28); color: #fff; }
+.dw-mini-btn.is-danger { color: #ff9d8f; border-color: rgba(220, 90, 70, 0.4); background: rgba(220, 90, 70, 0.12); }
+.dw-mini-btn.is-danger:hover { background: rgba(220, 90, 70, 0.3); color: #fff; }
+
+.dw-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font: 700 10.5px "Quicksand", "Tajawal", sans-serif;
+  border: 1px solid transparent;
+}
+
+.dw-badge.ok { background: rgba(70, 180, 110, 0.16); color: #7fe0a6; border-color: rgba(70, 180, 110, 0.35); }
+.dw-badge.wait { background: rgba(245, 166, 35, 0.16); color: #ffd18a; border-color: rgba(245, 166, 35, 0.35); }
+.dw-badge.off { background: rgba(180, 90, 80, 0.16); color: #ffb0a3; border-color: rgba(180, 90, 80, 0.35); }
+
+.dw-mod-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 14px;
+}
+
+.dw-mod-card {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(223, 162, 85, 0.3);
+  background: rgba(30, 19, 16, 0.9);
+}
+
+.dw-mod-card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+
+.dw-mod-info { padding: 11px 12px; font-size: 12px; color: #d9c3b2; }
+.dw-mod-info strong { display: block; color: #ffe0b3; font-size: 13px; margin-bottom: 3px; }
+.dw-mod-actions { display: flex; gap: 6px; padding: 0 12px 12px; flex-wrap: wrap; }
+
+.dw-lock {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: radial-gradient(ellipse at 50% 20%, #43291f, #1a100d 65%);
+}
+
+.dw-lock-card {
+  width: min(460px, 100%);
+  padding: 34px 28px;
+  border-radius: 24px;
+  text-align: center;
+  border: 1.5px solid rgba(245, 166, 35, 0.45);
+  background: linear-gradient(150deg, #35221c, #1e1310);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7);
+  color: #f3e0d2;
+}
+
+.dw-lock-icon {
+  width: 62px;
+  height: 62px;
+  margin: 0 auto 14px;
+  border-radius: 19px;
+  display: grid;
+  place-items: center;
+  background: rgba(245, 166, 35, 0.16);
+  color: #ffcf73;
+  font-size: 26px;
+}
+
+.dw-lock-card h1 { margin: 0 0 10px; font: 700 1.5rem "Fredoka", "Tajawal", sans-serif; color: #ffd88a; }
+.dw-lock-card p { margin: 0 0 20px; color: #cdb6a5; line-height: 1.75; font-size: 14px; }
+
+/* certificate print */
+
+@media print {
+  @page { size: A4 landscape; margin: 8mm; }
+
+  body.dw-print-cert * { visibility: hidden; }
+
+  body.dw-print-cert .dw-cert-shell,
+  body.dw-print-cert .dw-cert-shell * { visibility: visible; }
+
+  body.dw-print-cert .dw-cert-shell {
+    position: absolute;
+    inset: 0;
+    padding: 0;
+    display: block;
+  }
+
+  body.dw-print-cert .dw-certificate {
+    width: 100%;
+    max-width: none;
+    aspect-ratio: auto;
+    height: 190mm;
+    box-shadow: none;
+    border-width: 8px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body.dw-print-cert .site-header,
+  body.dw-print-cert .navbar,
+  body.dw-print-cert footer,
+  body.dw-print-cert .dw-cert-toolbar,
+  body.dw-print-cert .dw-cert-progress,
+  body.dw-print-cert .dw-lang-switch,
+  body.dw-print-cert .dw-floating-lang-host { display: none !important; }
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 900px) {
+  .dw-admin-shell { grid-template-columns: 1fr; }
+  .dw-admin-side {
+    position: relative;
+    height: auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border-inline-end: 0;
+    border-bottom: 1px solid rgba(223, 162, 85, 0.22);
+  }
+  .dw-admin-nav { display: flex; flex-wrap: wrap; gap: 6px; width: 100%; margin-top: 4px; }
+  .dw-admin-nav button { width: auto; padding: 8px 12px; font-size: 12px; }
+  .dw-admin-user { margin-top: 0; width: 100%; }
+  .dw-admin-main { padding: 20px 16px 60px; }
+}
+
+@media (max-width: 760px) {
+  .dw-club-banner { grid-template-columns: 1fr; text-align: center; }
+  .dw-club-cover { width: min(210px, 65%); margin: 0 auto; }
+  .dw-cert-foot { flex-direction: column; align-items: center; gap: 12px; }
+  .dw-certificate { aspect-ratio: auto; min-height: 560px; }
+  .dw-search-results { grid-template-columns: repeat(auto-fill, minmax(135px, 1fr)); gap: 20px 16px; }
+}
+
+@media (max-width: 520px) {
+  .dw-page-hero { padding-top: 132px; }
+  .dw-certificate { padding: 22px 16px; border-width: 6px; }
+  .dw-cert-corner { width: 32px; height: 32px; top: 14px !important; bottom: auto; }
+  .dw-cert-corner.bl, .dw-cert-corner.br { top: auto !important; bottom: 14px; }
+}
+
+/* Empty smart-search state */
+.dw-results-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 46px 20px;
+  border-radius: 20px;
+  border: 1px dashed rgba(223, 162, 85, 0.4);
+  background: rgba(58, 36, 29, 0.45);
+  color: #d6c4bf;
+}
+
+.dw-results-empty i { font-size: 34px; color: #ffcf73; margin-bottom: 10px; }
+.dw-results-empty h3 { margin: 0 0 8px; color: #ffdfa3; font-family: "Fredoka", "Tajawal", sans-serif; font-size: 1.35rem; }
+.dw-results-empty p { margin: 0 auto; max-width: 460px; line-height: 1.7; }
+
+/* ============================================================
+   BOOK CLUB · layout atoms
+   ============================================================ */
+
+.dw-club-section {
+  padding: clamp(20px, 3vw, 32px);
+  margin: 0 auto 32px;
+  border-radius: 24px;
+}
+
+.dw-section-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.dw-section-title {
+  margin: 6px 0 6px;
+  font: 700 clamp(1.35rem, 2.6vw, 1.8rem)/1.25 "Fredoka", "Tajawal", sans-serif;
+  color: #ffe1ae;
+}
+
+.dw-section-sub {
+  margin: 0;
+  color: #d9c3b2;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.dw-btn-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.dw-inline-status {
+  min-height: 18px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #e6cdb6;
+}
+
+.dw-inline-status[data-state="error"] { color: #ff9f92; }
+.dw-inline-status[data-state="success"] { color: #9fe0a8; }
+
+.dw-reflection-form {
+  display: grid;
+  gap: 14px;
+  padding: 20px;
+  margin: 0 0 24px;
+  border-radius: 20px;
+  border: 1px dashed rgba(223, 162, 85, 0.38);
+  background: rgba(31, 19, 15, 0.55);
+}
+
+.dw-reflection-form .dw-field { margin: 0; }
+
+.dw-btn[disabled] {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.dw-cert-lock-note {
+  max-width: 620px;
+  margin: -6px auto 22px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  border: 1px dashed rgba(223, 162, 85, 0.45);
+  background: rgba(245, 166, 35, 0.08);
+  color: #f0d6b8;
+  font-size: 13.5px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.dw-cert-lock-note a { color: #ffd88a; font-weight: 700; }
+
+@media (max-width: 620px) {
+  .dw-cert-toolbar { justify-content: stretch; }
+  .dw-cert-toolbar .dw-btn-row { width: 100%; }
+  .dw-cert-toolbar .dw-btn { width: 100%; justify-content: center; }
+}
+
+/* ============================================================
+   GAMIFICATION LAYER — avatar studio, champions board, gratitude
+   journal, illustrator spotlight
+   ============================================================ */
+
+.dw-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--dw-line);
+  background: rgba(245, 166, 35, 0.14);
+  color: var(--dw-gold-300);
+  font-weight: 700;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.dw-profile-panel { overflow: visible; }
+
+/* ---------- avatar studio ---------- */
+.dw-avatar-stage {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr);
+  gap: 26px;
+  align-items: start;
+}
+
+.dw-avatar-preview {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  border-radius: var(--dw-radius);
+  background: radial-gradient(circle at 50% 30%, rgba(255, 216, 138, 0.22), rgba(58, 36, 29, 0.9));
+  border: 1px solid var(--dw-line);
+  min-height: 190px;
+}
+
+.dw-avatar-preview svg { display: block; max-width: 100%; height: auto; }
+
+.dw-avatar-controls { display: grid; gap: 16px; }
+
+.dw-avatar-title { margin: 0 0 6px; font-size: 1.35rem; color: #fff6e6; }
+
+.dw-avatar-group { display: grid; gap: 8px; }
+
+.dw-chip-row { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.dw-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--dw-line);
+  background: rgba(28, 17, 14, 0.55);
+  color: var(--dw-cream-200);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.16s ease, border-color 0.16s ease, background 0.16s ease;
+}
+
+.dw-chip:hover { transform: translateY(-1px); border-color: var(--dw-gold-400); }
+
+.dw-chip.is-active {
+  background: linear-gradient(135deg, rgba(245, 166, 35, 0.9), rgba(217, 154, 69, 0.75));
+  border-color: var(--dw-gold-300);
+  color: #2b1a15;
+}
+
+.dw-chip-dot { width: 12px; height: 12px; border-radius: 50%; box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.35); }
+
+/* ---------- reader companion ---------- */
+.dw-companion {
+  position: fixed;
+  inset-inline-end: 22px;
+  bottom: 22px;
+  z-index: 60;
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  max-width: min(340px, 84vw);
+}
+
+.dw-companion[hidden] { display: none; }
+
+.dw-companion-face {
+  width: 86px;
+  height: 86px;
+  flex: 0 0 auto;
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.45));
+}
+
+.dw-companion-bubble {
+  position: relative;
+  padding: 12px 16px;
+  border-radius: 18px 18px 18px 6px;
+  background: rgba(252, 247, 238, 0.96);
+  color: var(--dw-ink);
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.45;
+  box-shadow: var(--dw-shadow);
+}
+
+html[dir="rtl"] .dw-companion-bubble { border-radius: 18px 18px 6px 18px; }
+
+/* ---------- gratitude journal ---------- */
+.dw-gratitude {
+  margin: 26px auto 0;
+  max-width: 640px;
+  padding: 22px 24px;
+  border-radius: var(--dw-radius);
+  background: linear-gradient(160deg, rgba(58, 36, 29, 0.92), rgba(29, 17, 14, 0.95));
+  border: 1px solid var(--dw-line);
+  box-shadow: var(--dw-shadow);
+}
+
+.dw-gratitude h3 {
+  margin: 0 0 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  color: var(--dw-gold-200);
+}
+
+.dw-gratitude p { margin: 0 0 12px; color: var(--dw-muted); font-size: 0.95rem; }
+
+.dw-gratitude textarea {
+  width: 100%;
+  min-height: 88px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--dw-line);
+  background: rgba(15, 9, 7, 0.55);
+  color: var(--dw-cream-100);
+  font-family: inherit;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  resize: vertical;
+}
+
+.dw-gratitude textarea:focus { outline: none; border-color: var(--dw-gold-400); }
+
+/* ---------- champions ---------- */
+
+.dw-board { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 10px; }
+
+.dw-board-row {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1.4fr) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  background: rgba(28, 17, 14, 0.55);
+  border: 1px solid rgba(223, 162, 85, 0.16);
+}
+
+.dw-board-row.is-podium {
+  background: linear-gradient(120deg, rgba(245, 166, 35, 0.18), rgba(28, 17, 14, 0.6));
+  border-color: var(--dw-line);
+}
+
+.dw-board-rank { font-size: 1.15rem; font-weight: 800; color: var(--dw-gold-300); text-align: center; }
+.dw-board-name { font-weight: 700; color: #fff6e6; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dw-board-title { font-size: 0.86rem; color: var(--dw-gold-400); font-weight: 600; }
+.dw-board-score { font-weight: 800; color: var(--dw-cream-200); display: inline-flex; align-items: center; gap: 6px; }
+
+.dw-board.is-compact .dw-board-row { grid-template-columns: 34px minmax(0, 1fr) auto auto; gap: 10px; padding: 10px 14px; }
+.dw-board.is-compact .dw-board-title { font-size: 0.78rem; }
+
+/* ---------- illustrator spotlight ---------- */
+.home-spotlight-section { padding: 10px 0 56px; }
+
+.dw-spotlight {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 32px;
+  align-items: center;
+  padding: 28px;
+  border-radius: 28px;
+  background: linear-gradient(140deg, rgba(58, 36, 29, 0.95), rgba(29, 17, 14, 0.98));
+  border: 1px solid var(--dw-line);
+  box-shadow: var(--dw-shadow);
+}
+
+.dw-spotlight-art { position: relative; border-radius: 20px; overflow: hidden; }
+.dw-spotlight-art img { display: block; width: 100%; height: 100%; max-height: 380px; object-fit: cover; }
+
+.dw-spotlight-ribbon {
+  position: absolute;
+  inset-inline-start: 14px;
+  top: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #f5a623, #d98a2b);
+  color: #2b1a15;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.dw-spotlight-copy { display: grid; gap: 12px; }
+.dw-spotlight-title { margin: 0; font-size: clamp(1.5rem, 2.6vw, 2.2rem); color: #fff6e6; }
+.dw-spotlight-story { margin: 0; color: var(--dw-gold-300); font-weight: 600; display: flex; gap: 10px; align-items: center; }
+.dw-spotlight-note { margin: 0; color: var(--dw-cream-200); font-size: 1.02rem; line-height: 1.7; font-style: italic; }
+.dw-spotlight-copy .dw-btn { justify-self: start; }
+
+/* ---------- contest banner ---------- */
+.dw-contest-banner {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 20px;
+  align-items: center;
+  padding: 22px 24px;
+  margin-bottom: 24px;
+  border-radius: var(--dw-radius);
+  background: linear-gradient(130deg, rgba(245, 166, 35, 0.16), rgba(58, 36, 29, 0.9));
+  border: 1px solid var(--dw-line);
+}
+
+.dw-contest-icon {
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(245, 166, 35, 0.2);
+  color: var(--dw-gold-300);
+  font-size: 1.3rem;
+}
+
+.dw-contest-banner h3 { margin: 0 0 6px; color: #fff6e6; font-size: 1.15rem; }
+.dw-contest-banner p { margin: 0; color: var(--dw-muted); font-size: 0.94rem; line-height: 1.65; }
+.dw-contest-month {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dw-gold-400);
+}
+
+
+/* ---------- journal archive ---------- */
+.dw-journal-list { display: grid; gap: 12px; margin-top: 18px; }
+
+.dw-journal-entry {
+  padding: 14px 18px;
+  border-radius: 16px;
+  background: rgba(28, 17, 14, 0.5);
+  border: 1px solid rgba(223, 162, 85, 0.16);
+  border-inline-start: 3px solid var(--dw-gold-400);
+}
+
+.dw-journal-date {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--dw-gold-400);
+  margin-bottom: 6px;
+}
+
+.dw-journal-entry p { margin: 0; color: var(--dw-cream-100); line-height: 1.7; font-size: 0.95rem; }
+.dw-journal-entry small { display: block; margin-top: 8px; color: var(--dw-muted); font-size: 0.8rem; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 900px) {
+  .dw-avatar-stage { grid-template-columns: 1fr; }
+  .dw-avatar-preview { max-width: 220px; margin: 0 auto; }
+  .dw-spotlight { grid-template-columns: 1fr; }
+  .dw-contest-banner { grid-template-columns: 1fr; justify-items: start; }
+  .dw-board-row,
+  .dw-board.is-compact .dw-board-row { grid-template-columns: 30px minmax(0, 1fr) auto; }
+  .dw-board-title { display: none; }
+}
+
+@media (max-width: 560px) {
+  .dw-companion { inset-inline-end: 12px; bottom: 12px; }
+  .dw-companion-face { width: 64px; height: 64px; }
+  .dw-companion-bubble { font-size: 0.82rem; padding: 10px 12px; }
+}
+
+.dw-page-hero-inner { display: grid; gap: 12px; justify-items: center; max-width: 760px; margin: 0 auto; }
+.dw-avatar-svg { max-width: 100%; height: auto; }
+
+/* ---------- winged book logo ---------- */
+.dw-logo-wrap {
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 40%, rgba(245, 166, 35, 0.28), rgba(43, 26, 21, 0.9));
+  border: 1px solid rgba(245, 166, 35, 0.35);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28), inset 0 0 12px rgba(255, 216, 138, 0.14);
+  overflow: hidden;
+}
+
+.dw-logo-img {
+  width: 78%;
+  height: 78%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.35));
+  transition: transform 0.45s ease;
+}
+
+.logo:hover .dw-logo-img,
+.dw-logo-wrap:hover .dw-logo-img { transform: rotate(-6deg) scale(1.06); }
+

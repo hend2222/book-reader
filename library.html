@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="dw-theme.js"></script>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamWings | Magic Library Categories</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS File -->
+    <link rel="stylesheet" href="library.style.css">
+    <link rel="stylesheet" href="reader-profile.css">
+    <link rel="stylesheet" href="dw-advanced.css">
+<link rel="icon" type="image/svg+xml" href="dw-logo.svg">
+<link rel="stylesheet" href="dw-theme.css">
+</head>
+<body>
+
+    <!-- 🌟 NAVBAR -->
+    <header class="navbar transparent-nav">
+        <div class="logo">
+            <div class="logo-icon-bg dw-logo-wrap"><img src="dw-logo.svg" alt="DreamWings" class="dw-logo-img"></div>
+            <span>DreamWings</span>
+        </div>
+
+        <nav class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="library.html" class="active">Library</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="about.html">About Me</a>
+            <a href="contact.html">Contact Us</a>
+        </nav>
+
+        <div class="nav-actions">
+            <a href="favorite.html" class="fav-btn" data-requires-auth="true" title="Favorites" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+                <i class="fa-solid fa-star"></i>
+            </a>
+            
+            <div id="auth-container" style="display: inline-flex; align-items: center;">
+                <a href="login.html" class="login-btn" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px">
+                    <i class="fa-brands fa-google"></i><span>Sign In</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 🌟 LIBRARY HERO HEADER -->
+    <section class="library-hero">
+        <div class="ambient-glow"></div>
+        <div class="hero-content">
+            <div class="hero-text-badge">
+                <i class="fa-solid fa-sparkles glowing-star"></i> Magic Story Categories
+            </div>
+            <h1 class="library-title">Explore Our Library Shelves</h1>
+            <p class="library-subtitle">Choose a category below to discover wonderful tales and magical adventures!</p>
+        </div>
+    </section>
+
+    <!-- 🔍 SMART SEARCH & VOICE / KEYWORD FILTERING BAR -->
+    <section class="library-search-section">
+        <div class="container">
+            <div class="search-bar-wrapper">
+                <div class="search-input-group">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="librarySearchInput" placeholder="Search stories, genres, animals, space, adventures..." aria-label="Search stories">
+                    <button type="button" id="clearSearchBtn" class="search-clear-btn" title="Clear Search" hidden>
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                    <button type="button" id="voiceSearchBtn" class="search-voice-btn" title="Voice Search">
+                        <i class="fa-solid fa-microphone"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quick Filter Genre / Keyword Chips -->
+            <div class="filter-chips-bar" id="filterChipsBar">
+                <button type="button" class="filter-chip active" data-genre="all">
+                    <span>⭐ All Stories</span>
+                </button>
+                <button type="button" class="filter-chip" data-genre="space-stars">
+                    <i class="fa-solid fa-rocket"></i> <span>Space & Stars</span>
+                </button>
+                <button type="button" class="filter-chip" data-genre="secret-kingdoms">
+                    <i class="fa-solid fa-hat-wizard"></i> <span>Secret Kingdoms</span>
+                </button>
+                <button type="button" class="filter-chip" data-genre="time-portals">
+                    <i class="fa-solid fa-hourglass-start"></i> <span>Time Portals</span>
+                </button>
+                <button type="button" class="filter-chip" data-genre="kind-hearts">
+                    <i class="fa-solid fa-hands-holding-child"></i> <span>Kind Hearts</span>
+                </button>
+                <button type="button" class="filter-chip" data-genre="little-scientist">
+                    <i class="fa-solid fa-flask"></i> <span>Little Scientist</span>
+                </button>
+                <button type="button" class="filter-chip" data-genre="sleepy-star-dreams">
+                    <i class="fa-solid fa-cloud-moon"></i> <span>Bedtime Dreams</span>
+                </button>
+                <button type="button" class="filter-chip" data-genre="animals">
+                    <i class="fa-solid fa-paw"></i> <span>Cute Animals</span>
+                </button>
+            </div>
+
+            <!-- Popular bilingual keywords -->
+            <div class="dw-suggest-row" id="searchSuggestions">
+                <button type="button" class="dw-suggest-chip" data-suggest="animals">🐻 <span>Animals</span></button>
+                <button type="button" class="dw-suggest-chip" data-suggest="space">🚀 <span>Space</span></button>
+                <button type="button" class="dw-suggest-chip" data-suggest="adventure">🗺️ <span>Adventure</span></button>
+                <button type="button" class="dw-suggest-chip" data-suggest="kindness">💛 <span>Kindness</span></button>
+                <button type="button" class="dw-suggest-chip" data-suggest="bedtime">🌙 <span>Bedtime</span></button>
+                <button type="button" class="dw-suggest-chip" data-suggest="magic">✨ <span>Magic</span></button>
+                <button type="button" class="dw-suggest-chip" data-suggest="science">🔬 <span>Science</span></button>
+                <button type="button" class="dw-suggest-chip" data-suggest="time">⏳ <span>Time travel</span></button>
+            </div>
+
+            <!-- Search result indicator note -->
+            <div id="searchResultNote" class="search-result-note" hidden></div>
+        </div>
+    </section>
+
+    <!-- 🔍 SMART SEARCH RESULTS -->
+    <section class="dw-results-section" id="searchResultsSection" hidden>
+        <div class="dw-results-head">
+            <h2><i class="fa-solid fa-wand-sparkles"></i><span>Search Results</span></h2>
+            <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+                <span class="dw-results-count" id="resultsCount"></span>
+                <button type="button" class="dw-btn dw-btn-ghost" id="resetFiltersBtn">
+                    <i class="fa-solid fa-rotate-left"></i><span>Clear filters</span>
+                </button>
+            </div>
+        </div>
+        <div class="dw-search-results" id="searchResults"></div>
+    </section>
+
+    <!-- 🌟 WOODEN BOOKSHELVES SECTIONS (CATEGORIES) -->
+    <main class="bookshelf-section" id="shelvesMain">
+        <div class="container">
+            
+            <!-- Empty state when search finds 0 matches -->
+            <div id="searchEmptyBox" class="search-empty-box" hidden>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <h3 style="color:#ffdfa3;margin:0 0 10px;font-family:'Fredoka',sans-serif;font-size:1.4rem">No Stories Found</h3>
+                <p style="color:#d6c4bf;margin:0">Try searching for other words like "space", "stars", "animals", or click "All Stories"!</p>
+            </div>
+
+            <!-- 🪵 SHELF 1: Fantasy & Sci-Fi -->
+            <div class="shelf-wrapper">
+                <div class="shelf-header">
+                    <h2><i class="fa-solid fa-wand-magic-sparkles"></i> Fantasy & Sci-Fi Tales</h2>
+                </div>
+                
+                <div class="shelf-grid">
+                    <!-- Book 1: Space & Stars -->
+                    <div class="book-card" data-genre="space-stars" data-title="Space & Stars" data-author="Sci-Fi Adventures" data-keywords="space stars astronaut sci-fi rockets adventure galaxy planets alien cosmos" data-requires-auth="true" onclick="location.href='category.html?id=space-stars'">
+                        <div class="book-3d-wrapper">
+                            <div class="book-cover cat-book-1">
+                                <div class="book-spine-effect"></div>
+                                <div class="book-badge">Popular</div>
+                                <i class="fa-solid fa-rocket book-icon"></i>
+                                <h3>Space & Stars</h3>
+                                <span class="author">Sci-Fi Adventures</span>
+                            </div>
+                        </div>
+                        <div class="book-shadow"></div>
+                    </div>
+
+                    <!-- Book 2: Magic Worlds -->
+                    <div class="book-card" data-genre="secret-kingdoms" data-title="Secret Kingdoms" data-author="Fantasy Worlds" data-keywords="secret kingdoms magic fantasy wizard castles dragons fairies wand magical" data-requires-auth="true" onclick="location.href='category.html?id=secret-kingdoms'">
+                        <div class="book-3d-wrapper">
+                            <div class="book-cover cat-book-2">
+                                <div class="book-spine-effect"></div>
+                                <div class="book-badge">Magical</div>
+                                <i class="fa-solid fa-hat-wizard book-icon"></i>
+                                <h3>Secret Kingdoms</h3>
+                                <span class="author">Fantasy Worlds</span>
+                            </div>
+                        </div>
+                        <div class="book-shadow"></div>
+                    </div>
+
+                    <!-- Book 3: Time Travel -->
+                    <div class="book-card" data-genre="time-portals" data-title="Time Portals" data-author="Sci-Fi Wonders" data-keywords="time portals time travel history dinosaur future adventure wonders clock" data-requires-auth="true" onclick="location.href='category.html?id=time-portals'">
+                        <div class="book-3d-wrapper">
+                            <div class="book-cover cat-book-3">
+                                <div class="book-spine-effect"></div>
+                                <div class="book-badge">Exciting</div>
+                                <i class="fa-solid fa-hourglass-start book-icon"></i>
+                                <h3>Time Portals</h3>
+                                <span class="author">Sci-Fi Wonders</span>
+                            </div>
+                        </div>
+                        <div class="book-shadow"></div>
+                    </div>
+                </div>
+                <div class="wooden-shelf-plank"><div class="wood-grain"></div></div>
+            </div>
+
+            <!-- 🪵 SHELF 2: Educational & Values -->
+            <div class="shelf-wrapper">
+                <div class="shelf-header">
+                    <h2><i class="fa-solid fa-hands-holding-child"></i> Educational & Values</h2>
+                </div>
+                
+                <div class="shelf-grid">
+                    <!-- Book 4: Good Morals -->
+                    <div class="book-card" data-genre="kind-hearts" data-title="Kind Hearts" data-author="Moral & Kindness" data-keywords="kind hearts kindness values friendship morals family honesty empathy sharing" data-requires-auth="true" onclick="location.href='category.html?id=kind-hearts'">
+                        <div class="book-3d-wrapper">
+                            <div class="book-cover cat-book-4">
+                                <div class="book-spine-effect"></div>
+                                <div class="book-badge">Values</div>
+                                <i class="fa-solid fa-hands-holding-child book-icon"></i>
+                                <h3>Kind Hearts</h3>
+                                <span class="author">Kindness & Morals</span>
+                            </div>
+                        </div>
+                        <div class="book-shadow"></div>
+                    </div>
+
+                    <!-- Book 5: Science & Nature -->
+                    <div class="book-card" data-genre="little-scientist" data-title="Little Scientist" data-author="Educational Fun" data-keywords="little scientist science nature experiments curiosity animals plants discoveries school" data-requires-auth="true" onclick="location.href='category.html?id=little-scientist'">
+                        <div class="book-3d-wrapper">
+                            <div class="book-cover cat-book-5">
+                                <div class="book-spine-effect"></div>
+                                <div class="book-badge">Learn</div>
+                                <i class="fa-solid fa-flask book-icon"></i>
+                                <h3>Little Scientist</h3>
+                                <span class="author">Educational Fun</span>
+                            </div>
+                        </div>
+                        <div class="book-shadow"></div>
+                    </div>
+
+                    <!-- Book 6: Bedtime Stories -->
+                    <div class="book-card" data-genre="sleepy-star-dreams" data-title="Sleepy Star Dreams" data-author="Calm Bedtime" data-keywords="sleepy star dreams bedtime stories night moon lullaby animals benny bear sleep calm" data-requires-auth="true" onclick="location.href='category.html?id=sleepy-star-dreams'">
+                        <div class="book-3d-wrapper">
+                            <div class="book-cover cat-book-6">
+                                <div class="book-spine-effect"></div>
+                                <div class="book-badge">Bedtime</div>
+                                <i class="fa-solid fa-cloud-moon book-icon"></i>
+                                <h3>Sleepy Star Dreams</h3>
+                                <span class="author">Calm Bedtime</span>
+                            </div>
+                        </div>
+                        <div class="book-shadow"></div>
+                    </div>
+                </div>
+                <div class="wooden-shelf-plank"><div class="wood-grain"></div></div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- 🌟 FOOTER -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-col">
+                <h3>DreamWings</h3>
+                <p>Magical stories narrated with love to inspire young hearts and minds.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="home.html">Home</a>
+                <a href="library.html">Library</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="book-club.html">Book Club</a>
+                <a href="about.html">About Me</a>
+            </div>
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 DreamWings. All rights reserved. Designed with 🧡 by Hind.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="i18n.js"></script>
+    <script type="module" src="library.script.js"></script>
+    <script type="module" src="auth-state.js"></script>
+    <script type="module" src="favorites.js"></script>
+    <script type="module" src="access-control.js"></script>
+    <script type="module" src="notifications.js"></script>
+</body>
+</html>

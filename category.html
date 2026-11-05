@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="dw-theme.js"></script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DreamWings | Category</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="library.style.css"><link rel="stylesheet" href="reader-profile.css">
+<style>
+.category-shelf-hero .hero-content{text-align:center}.category-shelf-hero .back-link{display:inline-block;margin-bottom:18px}
+#categorySymbol{width:64px;height:64px;margin:0 auto 14px;border-radius:20px;display:grid;place-items:center;color:white;font-size:28px;box-shadow:0 10px 24px #0005}
+#categoryBooks .shelf-grid{grid-template-columns:repeat(auto-fit,minmax(190px,1fr));align-items:end;gap:34px 28px;padding-bottom:8px}
+#categoryBooks .book-card-real{position:relative;cursor:pointer;text-align:center;min-width:0}
+#categoryBooks .book-card-real .book-3d-wrapper{width:190px;height:270px;margin:auto;perspective:1000px}
+#categoryBooks .book-card-real .real-book-cover{width:190px;height:270px;position:relative;overflow:hidden;border-radius:5px 13px 13px 5px;box-shadow:-7px 0 15px #0008,0 13px 25px #0008;transition:transform .35s;transform-style:preserve-3d}
+#categoryBooks .book-card-real:hover .real-book-cover{transform:translateY(-12px) rotateY(-9deg)}
+#categoryBooks .real-book-cover img{width:100%;height:100%;object-fit:cover;display:block}
+#categoryBooks .book-spine-effect{position:absolute;inset:0 auto 0 0;width:13px;background:linear-gradient(90deg,#0009,#fff3,#0002);pointer-events:none}
+#categoryBooks .book-shadow{height:16px;width:80%;margin:5px auto 0;background:radial-gradient(ellipse,#0009,transparent 70%)}
+#categoryBooks .dw-book-caption{margin-top:10px;color:#fff0df;font:600 15px Quicksand,sans-serif}
+#categoryBooks .dw-book-caption span{display:block;color:#d9b99a;font-size:12px;margin-top:4px}
+#categoryBooks .dw-admin-actions{display:flex;justify-content:center;gap:9px;margin:12px auto 0;position:relative;z-index:5}
+#categoryBooks .dw-admin-actions button{border:0;border-radius:18px;padding:8px 13px;color:#fff;font:700 12px Quicksand;cursor:pointer;box-shadow:0 3px 8px #0004}
+#categoryBooks .dw-admin-edit{background:linear-gradient(135deg,#bd7830,#e9ad51)}#categoryBooks .dw-admin-delete{background:linear-gradient(135deg,#923d35,#c85b4c)}
+#categoryBooks .dw-cat-empty{grid-column:1/-1;text-align:center;padding:40px;color:#e8cdb1}
+</style>    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dw-advanced.css">
+<link rel="icon" type="image/svg+xml" href="dw-logo.svg">
+<link rel="stylesheet" href="dw-theme.css">
+</head><body>
+<header class="navbar transparent-nav"><div class="logo"><div class="logo-icon-bg dw-logo-wrap"><img src="dw-logo.svg" alt="DreamWings" class="dw-logo-img"></div><span>DreamWings</span></div>
+<nav class="nav-links"><a href="home.html">Home</a><a href="library.html" class="active">Library</a><a href="about.html">About Me</a><a href="contact.html">Contact Us</a></nav>
+<div class="nav-actions"><a href="favorite.html" class="fav-btn" data-requires-auth="true" title="Favorites"><i class="fa-solid fa-star"></i></a><a href="profile.html" class="login-btn">Sign In</a></div></header>
+<section class="library-hero category-shelf-hero"><div class="hero-content"><a href="library.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Categories</a><div id="categorySymbol"><i class="fa-solid fa-book-open"></i></div><div class="hero-text-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> Magical Story Collection</div><h1 class="library-title" id="categoryTitle">Stories</h1><p class="library-subtitle">Choose a book and step into a new adventure ✨</p></div></section>
+<main class="bookshelf-section"><div class="container"><div class="shelf-wrapper"><div class="shelf-header"><h2><i class="fa-solid fa-compass"></i> Stories on this Shelf</h2></div><div id="categoryBooks" class="shelf-grid"><p class="dw-cat-empty">Loading stories…</p></div><div class="wooden-shelf-plank"><div class="wood-grain"></div></div></div></div></main>
+<script type="module" src="i18n.js"></script>
+<script type="module" src="book-admin.js"></script>
+<script type="module" src="category-page.js"></script>
+<script type="module" src="favorites.js"></script>
+</body></html>

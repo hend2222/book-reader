@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="dw-theme.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DreamWings | Storybook</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<!-- Canvas Confetti for Celebration -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<style>
+:root {
+  --ink: #321e16;
+  --gold: #d99a45;
+  --gold-glow: rgba(245, 166, 35, 0.45);
+  --paper-bg: #fcf7ee;
+  --book-leather: #3c211a;
+  --book-accent: #f5a623;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: #fff1df;
+  font-family: Quicksand, sans-serif;
+  background: radial-gradient(ellipse at 50% 15%, #4e2e21 0%, #2b1814 50%, #150d0b 100%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+}
+
+/* NAVBAR */
+.navbar {
+  height: 76px;
+  padding: 0 6%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(22, 14, 12, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font: 600 24px Fredoka, sans-serif;
+  color: #ffc46e;
+  text-decoration: none;
+}
+.logo-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #784428, #4a2818);
+  border: 1px solid rgba(245, 166, 35, 0.4);
+  display: grid;
+  place-items: center;
+  color: #ffe6ba;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+}
+.back-link {
+  color: #ffe0b2;
+  text-decoration: none;
+  border: 1px solid rgba(217, 154, 69, 0.55);
+  background: rgba(56, 32, 25, 0.65);
+  border-radius: 25px;
+  padding: 9px 18px;
+  font-weight: 700;
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+}
+.back-link:hover {
+  background: #d99a45;
+  color: #241410;
+  border-color: #ffd88a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(217, 154, 69, 0.4);
+}
+
+/* MAIN WRAPPER */
+main {
+  width: min(1040px, 94%);
+  margin: 28px auto 60px;
+}
+
+/* HEADER SECTION */
+.heading {
+  text-align: center;
+  margin-bottom: 22px;
+}
+.eyebrow {
+  color: #f2b75e;
+  font-size: 11px;
+  letter-spacing: 3.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.heading h1 {
+  font: 600 clamp(28px, 4.8vw, 42px) Fredoka, cursive, sans-serif;
+  margin: 6px 0;
+  color: #ffdfa3;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+}
+.heading p {
+  color: #e4cbb4;
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+/* EMBOSSED BOOK HEADER */
+.book-info {
+  text-align: center;
+  margin: 0 auto 20px;
+  max-width: 650px;
+}
+.book-title-embossed {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(24px, 3.8vw, 34px);
+  font-weight: 700;
+  color: #fff2db;
+  margin: 0 0 5px;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7), 0 0 20px rgba(245, 166, 35, 0.35);
+}
+.book-author-styled {
+  margin: 0;
+  color: #e5b98a;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.book-author-styled:before,
+.book-author-styled:after {
+  content: "";
+  display: inline-block;
+  width: 26px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #d99a45, transparent);
+}
+
+/* 3D BOOK STAGE */
+.book-stage {
+  perspective: 1800px;
+  width: min(780px, 100%);
+  margin: 0 auto;
+  position: relative;
+  padding: 10px 0 20px;
+}
+
+/* ============================================================
+   📖 CLOSED 3D BOOK COVER COMPONENT (Single Front Cover)
+   ============================================================ */
+.book-closed-container {
+  width: min(340px, 85vw);
+  height: 490px;
+  margin: 0 auto;
+  position: relative;
+  perspective: 1500px;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.book-closed-container:hover {
+  transform: translateY(-8px) rotateY(-6deg);
+}
+.book-closed-3d {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  box-shadow: 
+    -12px 18px 40px rgba(0, 0, 0, 0.75),
+    0 4px 18px rgba(0, 0, 0, 0.5);
+  border-radius: 6px 18px 18px 6px;
+}
+
+/* Leather Hardcover */
+.closed-cover-front {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px 18px 18px 6px;
+  background: 
+    linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 40%),
+    linear-gradient(150deg, #5c3525 0%, #3a1e16 55%, #23120d 100%);
+  border: 3px solid #dfa255;
+  box-shadow: inset 0 0 0 5px #26130e, inset 0 0 0 7px #caa162;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 26px 22px;
+  text-align: center;
+  overflow: hidden;
+  z-index: 10;
+}
+/* Spine Ridge Effect */
+.closed-cover-front:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 24px;
+  background: linear-gradient(90deg, 
+    rgba(10, 5, 4, 0.85) 0%, 
+    rgba(223, 162, 85, 0.45) 25%, 
+    rgba(10, 5, 4, 0.65) 55%, 
+    transparent 100%);
+  border-right: 1px solid rgba(245, 166, 35, 0.3);
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 15;
+}
+/* Shimmer Light Sweep */
+.closed-cover-front:after {
+  content: "";
+  position: absolute;
+  top: -60%;
+  left: -80%;
+  width: 50%;
+  height: 220%;
+  transform: rotate(25deg);
+  background: linear-gradient(90deg, transparent, rgba(255, 235, 195, 0.22), transparent);
+  animation: coverShimmerSweep 5.5s ease-in-out 1.2s infinite;
+  pointer-events: none;
+  z-index: 12;
+}
+@keyframes coverShimmerSweep {
+  0%, 60% { left: -80%; }
+  90%, 100% { left: 140%; }
+}
+
+/* Corner Filigrees */
+.cover-corner-flourish {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  border: 2px solid #e3a95d;
+  pointer-events: none;
+  z-index: 14;
+}
+.cover-corner-tl { top: 12px; left: 14px; border-right: 0; border-bottom: 0; }
+.cover-corner-tr { top: 12px; right: 14px; border-left: 0; border-bottom: 0; }
+.cover-corner-bl { bottom: 12px; left: 14px; border-right: 0; border-top: 0; }
+.cover-corner-br { bottom: 12px; right: 14px; border-left: 0; border-top: 0; }
+
+/* Book Cover Artwork Frame */
+.closed-cover-art-wrap {
+  position: relative;
+  width: min(200px, 65%);
+  height: 250px;
+  margin: 10px 0;
+  border-radius: 10px;
+  padding: 5px;
+  background: linear-gradient(135deg, #e3a95d, #7c4826);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.65), inset 0 0 8px rgba(0,0,0,0.4);
+  z-index: 11;
+}
+.closed-cover-art-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 7px;
+  display: block;
+}
+.closed-cover-header {
+  position: relative;
+  z-index: 11;
+  width: 100%;
+}
+.closed-cover-header .cover-brand-tag {
+  font-family: 'Fredoka', cursive, sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #ffd88a;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.closed-cover-header h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff3dc;
+  margin: 0;
+  line-height: 1.25;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.closed-cover-footer {
+  position: relative;
+  z-index: 11;
+}
+.closed-cover-footer p {
+  margin: 0;
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: 0.85rem;
+  color: #e5b98a;
+  letter-spacing: 1px;
+}
+
+/* 3D Paper Thickness Edges */
+.closed-book-edge {
+  position: absolute;
+  top: 8px;
+  right: -16px;
+  width: 18px;
+  height: calc(100% - 16px);
+  background: repeating-linear-gradient(
+    to bottom,
+    #fcf6ea 0px,
+    #eed8ba 1.5px,
+    #fcf6ea 3px
+  );
+  transform: rotateY(90deg) translateZ(-9px);
+  border-radius: 0 3px 3px 0;
+  box-shadow: inset 0 0 6px rgba(92, 53, 37, 0.6);
+}
+.closed-book-bottom-edge {
+  position: absolute;
+  bottom: -15px;
+  left: 10px;
+  width: calc(100% - 20px);
+  height: 16px;
+  background: repeating-linear-gradient(
+    to right,
+    #fcf6ea 0px,
+    #eed8ba 1.5px,
+    #fcf6ea 3px
+  );
+  transform: rotateX(-90deg) translateZ(-8px);
+  box-shadow: inset 0 0 6px rgba(92, 53, 37, 0.6);
+}
+
+/* ============================================================
+   📖 SINGLE-PAGE MAGICAL STORYBOOK READER
+   ============================================================ */
+.single-page-reader {
+  width: min(720px, 100%);
+  margin: 0 auto;
+  border-radius: 20px;
+  background: 
+    radial-gradient(circle at 15% 15%, rgba(220, 185, 140, 0.22) 0%, transparent 60%),
+    linear-gradient(135deg, #fcf8ee 0%, #f7edd8 100%);
+  border: 4px solid #caa162;
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.7),
+    0 0 0 8px #2b1712,
+    0 0 0 11px rgba(223, 162, 85, 0.5);
+  position: relative;
+  overflow: hidden;
+  color: var(--ink);
+  transition: transform 0.4s ease;
+}
+
+/* Single Page Deckle Border Accent */
+.single-page-reader:before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border: 1.5px solid rgba(189, 147, 98, 0.35);
+  border-radius: 12px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Page Header Ribbon */
+.single-page-header {
+  padding: 22px 28px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px dashed rgba(189, 147, 98, 0.35);
+  position: relative;
+  z-index: 2;
+}
+.page-pill {
+  background: rgba(223, 162, 85, 0.18);
+  border: 1px solid rgba(223, 162, 85, 0.5);
+  color: #7d441c;
+  font-family: 'Cinzel', Georgia, serif;
+  font-weight: 700;
+  font-size: 13px;
+  padding: 4px 14px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+}
+.page-story-title-chip {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #6a3e21;
+}
+
+/* Page Body Container */
+.single-page-body {
+  padding: 24px 38px 28px;
+  position: relative;
+  z-index: 2;
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Arched Story Illustration Box */
+.single-page-illustration-box {
+  width: 100%;
+  max-height: 320px;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 2px solid rgba(206, 171, 126, 0.45);
+  background: rgba(235, 219, 195, 0.3);
+  box-shadow: 0 8px 24px rgba(78, 41, 29, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  margin: 0 auto;
+}
+.single-page-illustration-box img {
+  max-width: 100%;
+  max-height: 300px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 10px;
+  display: block;
+}
+.single-page-illustration-box img[hidden] {
+  display: none !important;
+}
+
+/* Story Text Box */
+.single-page-text-box {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(15px, 1.6vw, 17.5px);
+  line-height: 1.9;
+  color: #321e16;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.single-page-text-box p {
+  margin: 0 0 16px;
+  text-align: justify;
+}
+.single-page-text-box p:first-of-type::first-letter {
+  font-family: 'Cinzel', 'Playfair Display', serif;
+  font-size: 3rem;
+  line-height: 0.88;
+  float: left;
+  margin: 4px 12px 0 0;
+  color: #9c552e;
+  font-weight: 700;
+  text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
+}
+html[dir="rtl"] .single-page-text-box p:first-of-type::first-letter {
+  float: right;
+  margin: 4px 0 0 12px;
+}
+
+/* Page Footer with Corner Ornaments */
+.single-page-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 28px 18px;
+  border-top: 1px dashed rgba(189, 147, 98, 0.35);
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: #9c7552;
+  letter-spacing: 1px;
+}
+
+/* ============================================================
+   ✨ SMOOTH 3D OPENING & FLIP ANIMATION
+   ============================================================ */
+.book-stage.opening .book-closed-container {
+  animation: bookSingleCoverOpen 0.9s cubic-bezier(0.25, 1, 0.35, 1) forwards;
+}
+@keyframes bookSingleCoverOpen {
+  0% { transform: rotateY(0deg) scale(1); opacity: 1; }
+  50% { transform: rotateY(-90deg) scale(1.04); opacity: 0.7; }
+  100% { transform: rotateY(-180deg) scale(1); opacity: 0; pointer-events: none; }
+}
+
+.single-page-reader.revealing {
+  animation: singlePageReveal 0.85s cubic-bezier(0.2, 0.8, 0.25, 1) forwards;
+}
+@keyframes singlePageReveal {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(24px);
+    filter: brightness(0.7);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: brightness(1);
+  }
+}
+
+/* In-Between Page Flipping Animation */
+.page-flip-anim {
+  animation: pageContentFlip 0.5s ease-out;
+}
+@keyframes pageContentFlip {
+  0% { opacity: 0.3; transform: translateX(12px); filter: blur(1px); }
+  100% { opacity: 1; transform: translateX(0); filter: blur(0); }
+}
+
+/* ============================================================
+   🪄 SLEEK MAGICAL FLOATING CONTROLS
+   ============================================================ */
+.reader-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 28px auto 10px;
+  position: relative;
+  z-index: 10;
+}
+.magical-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  border-radius: 30px;
+  padding: 13px 24px;
+  font-family: Quicksand, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-decoration: none;
+  outline: none;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  letter-spacing: 0.3px;
+}
+.magical-btn-gold {
+  background: linear-gradient(135deg, #f5a623 0%, #e08a2e 50%, #c46a18 100%);
+  color: #2b1612;
+  border: 1px solid #ffe39a;
+  box-shadow: 0 6px 24px rgba(245, 166, 35, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+.magical-btn-gold:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 10px 30px rgba(245, 166, 35, 0.65), 0 0 15px rgba(255, 216, 138, 0.6);
+  filter: brightness(1.08);
+}
+#startReading {
+  animation: magicalPulse 2.4s ease-in-out infinite;
+  padding: 15px 32px;
+  font-size: 16px;
+}
+@keyframes magicalPulse {
+  0%, 100% {
+    box-shadow: 0 6px 24px rgba(245, 166, 35, 0.45), 0 0 0 0 rgba(245, 166, 35, 0.6);
+  }
+  50% {
+    box-shadow: 0 8px 30px rgba(245, 166, 35, 0.7), 0 0 0 10px rgba(245, 166, 35, 0);
+  }
+}
+.magical-btn-wood {
+  background: rgba(58, 35, 28, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #ffd8a8;
+  border: 1.5px solid rgba(223, 162, 85, 0.5);
+}
+.magical-btn-wood:hover:not(:disabled) {
+  transform: translateY(-3px) scale(1.03);
+  background: rgba(85, 52, 42, 0.95);
+  border-color: #ffd88a;
+  color: #fff;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45), 0 0 12px rgba(223, 162, 85, 0.35);
+}
+.magical-btn-quiz {
+  background: linear-gradient(135deg, #a43e8c, #db5582);
+  color: #fff;
+  border: 1px solid #ffc0d8;
+  box-shadow: 0 6px 24px rgba(219, 85, 130, 0.45);
+  animation: quizGlow 2.2s infinite;
+}
+@keyframes quizGlow {
+  0%, 100% { transform: scale(1); box-shadow: 0 6px 24px rgba(219, 85, 130, 0.45); }
+  50% { transform: scale(1.05); box-shadow: 0 8px 30px rgba(219, 85, 130, 0.75); }
+}
+.magical-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* PROGRESS BAR */
+.progress-wrap {
+  width: min(440px, 90%);
+  margin: 20px auto 0;
+  color: #d9b99a;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+}
+.progress-track {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  margin-top: 9px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.progress-fill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #e59849, #f5a623);
+  border-radius: 12px;
+  transition: width 0.4s ease;
+  box-shadow: 0 0 10px rgba(245, 166, 35, 0.5);
+}
+.status {
+  text-align: center;
+  min-height: 24px;
+  color: #ffd8a8;
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 15px;
+}
+
+/* VIDEO SECTION */
+.story-video-wrap {
+  width: min(780px, 100%);
+  margin: 32px auto 0;
+  padding: 22px;
+  border: 1.5px solid rgba(223, 162, 85, 0.4);
+  border-radius: 22px;
+  background: linear-gradient(145deg, #38221b, #1f1310);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+.story-video-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffd18a;
+  font: 600 20px Fredoka, sans-serif;
+  margin: 0 0 15px;
+}
+.story-video-frame {
+  overflow: hidden;
+  border: 4px solid #b77d43;
+  border-radius: 14px;
+  background: #000;
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.8);
+}
+.story-video-frame video {
+  display: block;
+  width: 100%;
+  max-height: 480px;
+  aspect-ratio: 16/9;
+  object-fit: contain;
+}
+
+/* ============================================================
+   ⭐ POST-STORY MAGIC QUIZ MODAL
+   ============================================================ */
+.quiz-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(14, 8, 7, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+.quiz-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.quiz-card {
+  width: min(580px, 100%);
+  background: linear-gradient(145deg, #3b221a, #231411);
+  border: 2px solid #f5a623;
+  border-radius: 24px;
+  padding: 32px 28px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(245, 166, 35, 0.25);
+  color: #fff;
+  text-align: center;
+  position: relative;
+  transform: translateY(20px) scale(0.95);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.quiz-overlay.active .quiz-card {
+  transform: translateY(0) scale(1);
+}
+.quiz-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffcf87;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+}
+.quiz-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(245, 166, 35, 0.2);
+  border: 1px solid rgba(245, 166, 35, 0.5);
+  color: #ffd88a;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.quiz-question-title {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1.35rem;
+  color: #ffdfa3;
+  margin: 10px 0 20px;
+  line-height: 1.4;
+}
+.quiz-options-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 20px 0;
+  text-align: left;
+}
+html[dir="rtl"] .quiz-options-grid {
+  text-align: right;
+}
+.quiz-option-btn {
+  background: rgba(68, 42, 33, 0.85);
+  border: 1.5px solid rgba(223, 162, 85, 0.4);
+  border-radius: 16px;
+  padding: 14px 20px;
+  color: #fff1df;
+  font-family: Quicksand, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.25s ease;
+}
+.quiz-option-btn:hover {
+  background: rgba(100, 60, 48, 0.95);
+  border-color: #ffd88a;
+  transform: translateX(4px);
+}
+html[dir="rtl"] .quiz-option-btn:hover {
+  transform: translateX(-4px);
+}
+.quiz-option-btn.correct {
+  background: rgba(34, 110, 60, 0.9) !important;
+  border-color: #4ade80 !important;
+  color: #fff !important;
+  box-shadow: 0 0 15px rgba(74, 222, 128, 0.4);
+}
+.quiz-option-btn.wrong {
+  background: rgba(120, 35, 30, 0.9) !important;
+  border-color: #f87171 !important;
+  color: #fff !important;
+}
+
+/* Quiz Victory Star Screen */
+.quiz-victory-box {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 10px;
+}
+.quiz-victory-star {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #f5a623 0%, #c46a18 100%);
+  display: grid;
+  place-items: center;
+  font-size: 46px;
+  color: #fff;
+  box-shadow: 0 0 30px rgba(245, 166, 35, 0.7);
+  animation: starSpin 3s infinite ease-in-out;
+}
+@keyframes starSpin {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.15) rotate(15deg); }
+}
+.quiz-victory-title {
+  font-family: 'Fredoka', cursive, sans-serif;
+  font-size: 1.6rem;
+  color: #ffd88a;
+  margin: 0;
+}
+.quiz-victory-desc {
+  color: #e2cebf;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* RESPONSIVE */
+@media (max-width: 650px) {
+  .single-page-body {
+    padding: 18px 20px 22px;
+  }
+  .single-page-header {
+    padding: 16px 20px 10px;
+  }
+  .book-closed-container {
+    height: 440px;
+  }
+  .closed-cover-art-wrap {
+    height: 210px;
+  }
+}
+
+/* ============================================================
+   ✨ v10 — closed-cover focus, magic burst, completion banner
+   ============================================================ */
+body.dw-cover-only .heading { display: none; }
+body.dw-cover-only main { margin-top: 48px; }
+
+#reader.is-closed .book-info,
+#reader.is-closed .progress-wrap,
+#reader.is-closed .reader-controls .magical-btn:not(#startReading) {
+  display: none !important;
+}
+
+.book-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 540px;
+}
+
+.cover-hint {
+  margin: 22px 0 0;
+  color: #e9cbaa;
+  font-size: 0.9rem;
+  letter-spacing: 1.2px;
+  text-align: center;
+  animation: hintFloat 3s ease-in-out infinite;
+}
+html[dir="rtl"] .cover-hint { letter-spacing: 0; }
+
+@keyframes hintFloat {
+  0%, 100% { opacity: 0.6; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-4px); }
+}
+
+/* Golden light that floods out of the book while it opens */
+.magic-burst {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    radial-gradient(circle at 50% 58%, rgba(255, 236, 190, 0.95) 0%, rgba(245, 166, 35, 0.55) 22%, rgba(245, 166, 35, 0.12) 46%, transparent 68%);
+}
+
+.magic-burst::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 58%;
+  width: 160vmax;
+  height: 160vmax;
+  transform: translate(-50%, -50%) scale(0.2);
+  background: repeating-conic-gradient(
+    from 0deg,
+    rgba(255, 226, 170, 0.55) 0deg 3deg,
+    transparent 3deg 16deg
+  );
+  mask-image: radial-gradient(circle, #000 8%, transparent 58%);
+  -webkit-mask-image: radial-gradient(circle, #000 8%, transparent 58%);
+  opacity: 0.8;
+}
+
+.book-stage.is-opening .magic-burst {
+  animation: burstFlood 1.15s cubic-bezier(0.2, 0.8, 0.25, 1) forwards;
+}
+
+.book-stage.is-opening .magic-burst::before {
+  animation: burstRays 1.15s cubic-bezier(0.2, 0.8, 0.25, 1) forwards;
+}
+
+@keyframes burstFlood {
+  0% { opacity: 0; }
+  18% { opacity: 1; }
+  62% { opacity: 0.85; }
+  100% { opacity: 0; }
+}
+
+@keyframes burstRays {
+  0% { transform: translate(-50%, -50%) scale(0.15) rotate(0deg); opacity: 0; }
+  35% { opacity: 0.9; }
+  100% { transform: translate(-50%, -50%) scale(1.15) rotate(22deg); opacity: 0; }
+}
+
+/* Closed cover sits a little lower and larger to feel like the only object */
+#reader.is-closed .book-stage { min-height: 70vh; }
+#reader.is-closed .book-closed-container { transform: scale(1.03); }
+
+/* Completion banner */
+.reader-complete {
+  width: min(660px, 94%);
+  margin: 26px auto 0;
+  padding: 20px 24px;
+  border-radius: 20px;
+  border: 1.5px solid rgba(245, 166, 35, 0.55);
+  background: linear-gradient(135deg, rgba(245, 166, 35, 0.18), rgba(48, 29, 24, 0.9));
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  color: #ffe6bd;
+}
+
+.reader-complete h3 {
+  margin: 0 0 6px;
+  font: 600 1.15rem "Fredoka", "Tajawal", sans-serif;
+  color: #ffd88a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}
+
+.reader-complete p { margin: 0 0 14px; color: #e3ccba; font-size: 0.92rem; line-height: 1.7; }
+
+.reader-complete-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.reader-complete-actions .magical-btn { padding: 10px 18px; font-size: 13px; }
+
+/* Certificate progress chip inside the completion banner */
+.reader-cert-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 7px 15px;
+  border-radius: 999px;
+  border: 1px dashed rgba(245, 166, 35, 0.55);
+  color: #ffd8a8;
+  font-size: 12.5px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.reader-cert-chip:hover { background: rgba(245, 166, 35, 0.16); }
+
+@media (max-width: 650px) {
+  .book-stage { min-height: 470px; }
+  #reader.is-closed .book-stage { min-height: 62vh; }
+}
+
+/* ============================================================
+   📖 v13.3 — Fullscreen reading mode
+   Opening the book lifts the page into a viewport-sized reading
+   surface; the ribbon gets a "Book details" button that returns
+   to the cover and the story video.
+   ============================================================ */
+
+.reader-back-btn { display: none; }
+
+/* the [hidden] attribute must win over the layout display rules */
+.reader-controls .magical-btn[hidden],
+.single-page-illustration-box[hidden],
+.book-closed-container[hidden] { display: none !important; }
+
+body.dw-reading { overflow: hidden; --dw-reader-bar: 78px; }
+
+body.dw-reading .heading,
+body.dw-reading .book-info,
+body.dw-reading .story-video-wrap,
+body.dw-reading .progress-wrap { display: none !important; }
+
+/* the 3D stage creates a containing block for fixed children — release it */
+body.dw-reading .book-stage {
+  perspective: none;
+  transform: none;
+  display: block;
+  width: 100%;
+  max-width: none;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+body.dw-reading #openBook {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  width: 100%;
+  max-width: none;
+  height: 100vh;
+  height: 100dvh;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+}
+
+body.dw-reading #openBook:before { display: none; }
+
+body.dw-reading .single-page-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  gap: 12px;
+  background: rgba(252, 246, 234, 0.95);
+  backdrop-filter: blur(9px);
+  border-bottom: 1px solid rgba(189, 147, 98, 0.4);
+}
+
+body.dw-reading .reader-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 15px 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(189, 147, 98, 0.6);
+  background: rgba(255, 255, 255, 0.7);
+  color: #6a3e21;
+  font: 700 12.5px/1 "Quicksand", "Tajawal", sans-serif;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+body.dw-reading .reader-back-btn:hover,
+body.dw-reading .reader-back-btn:focus-visible {
+  background: #fff;
+  box-shadow: 0 6px 16px rgba(122, 82, 45, 0.18);
+  transform: translateX(-2px);
+}
+
+html[dir="rtl"] body.dw-reading .reader-back-btn:hover,
+html[dir="rtl"] body.dw-reading .reader-back-btn:focus-visible { transform: translateX(2px); }
+
+body.dw-reading .single-page-body {
+  flex: 1;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  min-height: 0;
+  padding: 28px clamp(18px, 5vw, 64px) 32px;
+  font-size: clamp(1rem, 0.45vw + 0.92rem, 1.2rem);
+  line-height: 1.95;
+}
+
+body.dw-reading .single-page-footer { margin-bottom: var(--dw-reader-bar); }
+
+body.dw-reading .reader-controls {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 960;
+  margin: 0;
+  gap: 10px;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  background: linear-gradient(to top, rgba(20, 12, 10, 0.97) 35%, rgba(20, 12, 10, 0.8) 72%, transparent);
+}
+
+/* the completion card becomes a dialog floating above the page */
+body.dw-reading .reader-complete {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--dw-reader-bar) + 14px);
+  transform: translateX(-50%);
+  z-index: 970;
+  width: min(560px, calc(100vw - 28px));
+  max-height: calc(100dvh - var(--dw-reader-bar) - 90px);
+  margin: 0;
+  overflow-y: auto;
+  background: linear-gradient(150deg, #4a2f25, #241512 72%);
+  border-color: rgba(245, 166, 35, 0.55);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55), 0 0 0 100vmax rgba(12, 7, 6, 0.55);
+}
+
+body.dw-reading .reader-complete p { color: #e6cfbb; }
+
+@media (max-width: 640px) {
+  body.dw-reading { --dw-reader-bar: 70px; }
+  body.dw-reading .single-page-header { padding: 14px 16px 10px; }
+  body.dw-reading .page-story-title-chip { display: none; }
+  body.dw-reading .single-page-body { padding: 20px 18px 28px; }
+  body.dw-reading .single-page-footer { margin-bottom: var(--dw-reader-bar); }
+  body.dw-reading .reader-controls {
+    gap: 7px;
+    padding: 10px 10px calc(10px + env(safe-area-inset-bottom));
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    scrollbar-width: none;
+  }
+  body.dw-reading .reader-controls::-webkit-scrollbar { display: none; }
+  body.dw-reading .reader-controls .magical-btn {
+    flex: 0 0 auto;
+    padding: 11px 15px;
+    font-size: 12.5px;
+    white-space: nowrap;
+  }
+}
+
+</style>
+<link rel="stylesheet" href="dw-advanced.css">
+<link rel="icon" type="image/svg+xml" href="dw-logo.svg">
+<link rel="stylesheet" href="dw-theme.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+  <a href="home.html" class="logo">
+    <span class="logo-icon dw-logo-wrap"><img src="dw-logo.svg" alt="DreamWings" class="dw-logo-img"></span>
+    <span>DreamWings</span>
+  </a>
+  <a href="library.html" class="back-link">
+    <i class="fa-solid fa-arrow-left"></i>
+    <span>Back to Library</span>
+  </a>
+</header>
+
+<!-- MAIN READER -->
+<main>
+  <!-- HEADING -->
+  <section class="heading">
+    <div class="eyebrow">
+      <i class="fa-solid fa-sparkles"></i>
+      <span>A MAGICAL READING JOURNEY</span>
+    </div>
+    <h1>Your Storybook</h1>
+    <p>Turn the pages and let your imagination fly ✨</p>
+  </section>
+
+  <!-- LOADING STATUS -->
+  <div id="loading" class="status">Opening your magical book…</div>
+
+  <!-- READER ROOT -->
+  <section id="reader" class="is-closed" hidden>
+    
+    <!-- EMBOSSED BOOK TITLE & AUTHOR -->
+    <div class="book-info">
+      <h2 id="bookTitle" class="book-title-embossed">Story Title</h2>
+      <p id="bookAuthor" class="book-author-styled">A DreamWings story</p>
+    </div>
+
+    <!-- 3D BOOK STAGE -->
+    <div class="book-stage" id="bookStage">
+      
+      <!-- 1. CLOSED 3D COVER COMPONENT -->
+      <div id="cover" class="book-closed-container">
+        <div class="book-closed-3d">
+          <div class="closed-cover-front">
+            <span class="cover-corner-flourish cover-corner-tl"></span>
+            <span class="cover-corner-flourish cover-corner-tr"></span>
+            <span class="cover-corner-flourish cover-corner-bl"></span>
+            <span class="cover-corner-flourish cover-corner-br"></span>
+
+            <div class="closed-cover-header">
+              <div class="cover-brand-tag">✨ DreamWings Story ✨</div>
+              <h2 id="coverTitle">Story Title</h2>
+            </div>
+
+            <div class="closed-cover-art-wrap">
+              <img id="bookCover" alt="Book cover">
+            </div>
+
+            <div class="closed-cover-footer">
+              <p id="coverAuthor">Hind</p>
+            </div>
+          </div>
+          <!-- 3D Paper Thickness Edges -->
+          <div class="closed-book-edge"></div>
+          <div class="closed-book-bottom-edge"></div>
+        </div>
+      </div>
+
+      <p class="cover-hint" id="coverHint">Tap to open your magical storybook</p>
+      <div class="magic-burst" id="magicBurst" aria-hidden="true"></div>
+
+      <!-- 2. SINGLE-PAGE STORYBOOK READER VIEW -->
+      <article id="openBook" class="single-page-reader" hidden>
+        <!-- Header Ribbon -->
+        <div class="single-page-header">
+          <button type="button" id="readerBack" class="reader-back-btn" aria-label="Back to book details">
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+            <span>Book details</span>
+          </button>
+          <span class="page-pill" id="pagePill">Page 1</span>
+          <span class="page-story-title-chip" id="pageTitleChip">DreamWings</span>
+        </div>
+
+        <!-- Body with Illustration & Text -->
+        <div class="single-page-body" id="singlePageBody">
+          <!-- Illustration Box (When available) -->
+          <div class="single-page-illustration-box" id="illustrationBox">
+            <img id="pageIllustration" alt="Story Illustration" hidden>
+          </div>
+
+          <!-- Story Text Content -->
+          <div class="single-page-text-box" id="pageText"></div>
+        </div>
+
+        <!-- Footer -->
+        <div class="single-page-footer">
+          <span id="pageFooterNumber">Page 1</span>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- MAGICAL FLOATING CONTROLS -->
+    <div class="reader-controls">
+      <button id="startReading" class="magical-btn magical-btn-gold" type="button">
+        <i class="fa-solid fa-book-open"></i>
+        <span>Open Book</span>
+      </button>
+
+      <button id="prevPage" class="magical-btn magical-btn-wood" type="button" disabled hidden>
+        <i class="fa-solid fa-chevron-left"></i>
+        <span>Previous</span>
+      </button>
+
+      <button id="nextPage" class="magical-btn magical-btn-gold" type="button" disabled hidden>
+        <span>Next</span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+
+      <!-- Post-Story Magic Quiz Button -->
+      <button id="takeQuizBtn" class="magical-btn magical-btn-quiz" type="button" hidden>
+        <i class="fa-solid fa-wand-magic-sparkles"></i>
+        <span>Take Magic Quiz! ⭐</span>
+      </button>
+
+      <button id="playNarration" class="magical-btn magical-btn-wood" type="button" hidden>
+        <i class="fa-solid fa-volume-high"></i>
+        <span>Play my audio</span>
+      </button>
+
+      <button id="pauseNarration" class="magical-btn magical-btn-wood" type="button" hidden>
+        <i class="fa-solid fa-pause"></i>
+        <span>Pause</span>
+      </button>
+
+      <audio id="bookNarration" preload="none"></audio>
+    </div>
+
+    <!-- OPTIONAL STORY VIDEO SECTION -->
+    <section id="storyVideoSection" class="story-video-wrap" hidden>
+      <h3 class="story-video-title">
+        <i class="fa-solid fa-circle-play"></i>
+        <span>Watch the story</span>
+      </h3>
+      <div class="story-video-frame">
+        <video id="storyVideo" controls playsinline preload="metadata"></video>
+      </div>
+    </section>
+
+    <!-- READING PROGRESS -->
+    <div class="progress-wrap">
+      <span id="pageProgress">Page 1</span>
+      <div class="progress-track">
+        <div id="progressFill" class="progress-fill"></div>
+      </div>
+    </div>
+
+    <!-- ✨ STORY COMPLETE -->
+    <div class="reader-complete" id="readerComplete" hidden>
+      <h3><i class="fa-solid fa-wand-magic-sparkles"></i><span>You finished the story! 🎉</span></h3>
+      <p>Answer 3 gentle questions to earn your Magical Excellence Star.</p>
+      <div class="reader-complete-actions">
+        <button type="button" class="magical-btn magical-btn-quiz" id="completeQuizBtn">
+          <i class="fa-solid fa-star"></i><span>Take the Magic Quiz</span>
+        </button>
+        <button type="button" class="magical-btn magical-btn-wood" id="readAgainBtn">
+          <i class="fa-solid fa-rotate-left"></i><span>Read again</span>
+        </button>
+      </div>
+      <a href="certificate.html" class="reader-cert-chip" id="readerCertChip">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span id="readerCertText">Read 0 of 5 stories to unlock your certificate</span>
+      </a>
+
+      <!-- BEDTIME GRATITUDE JOURNAL -->
+      <div class="dw-gratitude" id="gratitudeCard">
+        <h3><i class="fa-solid fa-moon"></i><span>One last thing before sleep…</span></h3>
+        <p>What was the best thing that happened to you today?</p>
+        <textarea id="gratitudeText" maxlength="600" placeholder="Today I felt happy because…"></textarea>
+        <div class="dw-btn-row" style="margin-top:10px;">
+          <button type="button" class="magical-btn magical-btn-wood" id="gratitudeSave">
+            <i class="fa-solid fa-feather-pointed"></i><span>Save to my journal</span>
+          </button>
+          <span class="dw-inline-status" id="gratitudeStatus" role="status"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DYNAMIC STATUS TEXT -->
+    <p id="readerStatus" class="status" aria-live="polite"></p>
+
+  </section>
+</main>
+
+<!-- ⭐ POST-STORY MAGIC QUIZ MODAL -->
+<div class="quiz-overlay" id="quizModal">
+  <div class="quiz-card">
+    <button class="quiz-close-btn" id="closeQuizBtn" type="button" aria-label="Close Quiz">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <!-- Questions View -->
+    <div id="quizQuestionsContainer">
+      <div class="quiz-badge">
+        <i class="fa-solid fa-wand-magic-sparkles"></i>
+        <span id="quizQuestionCount">Question 1 of 3</span>
+      </div>
+
+      <h3 class="quiz-question-title" id="quizQuestionText">What was the main lesson of the story?</h3>
+
+      <div class="quiz-options-grid" id="quizOptionsGrid">
+        <!-- Rendered by reader.js -->
+      </div>
+    </div>
+
+    <!-- Victory Screen View -->
+    <div class="quiz-victory-box" id="quizVictoryBox">
+      <div class="quiz-victory-star">
+        <i class="fa-solid fa-star"></i>
+      </div>
+      <h3 class="quiz-victory-title">Magical Excellence Star! ⭐</h3>
+      <p class="quiz-victory-desc">
+        Congratulations! You answered all questions with flying colors! Your Magical Excellence Star has been added to your profile journey!
+      </p>
+      <button class="magical-btn magical-btn-gold" id="finishQuizBtn" type="button" style="margin-top:15px;">
+        <i class="fa-solid fa-award"></i>
+        <span>Claim My Star! ✨</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- MAGICAL COMPANION -->
+<div class="dw-companion" id="dwCompanion" hidden>
+  <div class="dw-companion-bubble" id="dwCompanionBubble">Ready for a story together?</div>
+  <div class="dw-companion-face" id="dwCompanionFace"></div>
+</div>
+
+<script type="module" src="i18n.js"></script>
+<script type="module" src="./reader.js"></script>
+</body>
+</html>

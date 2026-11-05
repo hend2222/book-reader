@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" data-lang-toggle="true">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <!-- 📌 DreamWings - Modern Storybook Layout -->
+    <title>DreamWings | Magic Children Stories</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS File -->
+    <link rel="stylesheet" href="home.style.css">
+<link rel="stylesheet" href="reader-profile.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dw-advanced.css">
+<link rel="icon" type="image/svg+xml" href="dw-logo.svg">
+</head>
+<body>
+
+    <!-- 🌟 TRANSPARENT HEADER -->
+    <header class="navbar transparent-nav">
+        <div class="logo">
+            <div class="logo-icon-bg dw-logo-wrap"><img src="dw-logo.svg" alt="DreamWings" class="dw-logo-img"></div>
+            <span>DreamWings</span>
+        </div>
+
+        <nav class="nav-links">
+            <a href="home.html" class="active">Home</a>
+            <a href="library.html">Library</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="about.html">About Me</a>
+            <a href="contact.html">Contact Us</a>
+        </nav>
+
+   <div class="nav-actions">
+    <a href="favorite.html" class="fav-btn" data-requires-auth="true" title="Favorites" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+        <i class="fa-solid fa-star"></i>
+    </a>
+    
+    <!-- حاوية ديناميكية فارغة يرسمها الجافاسكريبت فوراً حسب حالة المستخدم -->
+    <div id="auth-container" style="display: inline-flex; align-items: center;">
+      <a href="login.html" class="login-btn" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px">
+        <i class="fa-brands fa-google"></i><span>Sign In</span>
+      </a>
+    </div>
+</div>
+
+
+
+    
+    </header>
+
+    <!-- 🌟 MAGICAL HERO: STORY TREE & LITTLE READER -->
+    <main class="hero-section dw-hero" id="dwHero">
+        <div class="dw-night-sky" id="dwSky" aria-hidden="true"></div>
+        <div class="ambient-glow"></div>
+
+        <div class="container hero-grid">
+            <div class="hero-text-side">
+                <div class="hero-text-badge">⭐ <span>Interactive Story Library</span></div>
+                <h1 class="hero-title">Where Stories Fly &amp; Dreams Begin</h1>
+                <p class="hero-subtitle">Step into a magical world of tales narrated with love and warmth for young curious minds.</p>
+
+                <div class="dw-hero-cta-row">
+                    <button class="cta-btn-magical" onclick="window.location.href='library.html'">
+                        <span>Explore The Library</span>
+                        <i class="fa-solid fa-arrow-right-long"></i>
+                    </button>
+                    <a class="dw-hero-ghost-link" href="#dwBookClub">
+                        <i class="fa-solid fa-moon"></i><span>This month's book club</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-image-side" id="heroCharacter">
+                <div class="dw-hero-artwork" id="dwHeroArtwork" tabindex="0" role="button"
+                     aria-label="Say hello to the little reader">
+                    <div class="char-glow-bg"></div>
+                    <div class="dw-hero-float">
+                        <div class="dw-hero-scene" id="dwHeroScene"></div>
+                    </div>
+
+                    <div class="dw-greeting" id="dwGreeting" role="status" aria-live="polite" hidden>
+                        <span class="dw-greeting-spark" aria-hidden="true">✦</span>
+                        <p>Welcome to the world of tales, hero!</p>
+                    </div>
+                </div>
+                <p class="dw-tap-hint"><i class="fa-solid fa-hand-pointer" aria-hidden="true"></i><span>Tap the little reader</span></p>
+            </div>
+        </div>
+
+        <!-- ☁️ CLOUD & STARRY EDGE DIVIDER -->
+        <div class="dw-cloud-divider" aria-hidden="true">
+            <div class="dw-divider-stars">
+                <span style="left:8%;--dw-delay:0s"></span>
+                <span style="left:21%;--dw-delay:1.2s"></span>
+                <span style="left:34%;--dw-delay:2.4s"></span>
+                <span style="left:47%;--dw-delay:.6s"></span>
+                <span style="left:61%;--dw-delay:1.8s"></span>
+                <span style="left:74%;--dw-delay:3s"></span>
+                <span style="left:88%;--dw-delay:.9s"></span>
+            </div>
+<svg class="dw-divider-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 240" preserveAspectRatio="none" aria-hidden="true">
+  <defs>
+    <linearGradient id="dwCloudFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fffdf9"/><stop offset="60%" stop-color="#fbf7f0"/><stop offset="100%" stop-color="#faf6f0"/>
+    </linearGradient>
+    <linearGradient id="dwCloudBack" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f6ecdc" stop-opacity=".55"/><stop offset="100%" stop-color="#f6ecdc" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <g opacity=".7" transform="translate(0,-22)"><path d="M0,150 A62,62 0 0 1 124,147 A44,44 0 0 1 212,150 A70,70 0 0 1 352,152 A38,38 0 0 1 428,148 A54,54 0 0 1 536,147 A66,66 0 0 1 668,150 A40,40 0 0 1 748,151 A58,58 0 0 1 864,155 A72,72 0 0 1 1008,158 A46,46 0 0 1 1100,153 A60,60 0 0 1 1220,156 A42,42 0 0 1 1304,150 A64,64 0 0 1 1432,151 A48,48 0 0 1 1440,151 L1440,240 L0,240 Z" fill="url(#dwCloudBack)"/></g>
+  <path d="M0,150 A62,62 0 0 1 124,147 A44,44 0 0 1 212,150 A70,70 0 0 1 352,152 A38,38 0 0 1 428,148 A54,54 0 0 1 536,147 A66,66 0 0 1 668,150 A40,40 0 0 1 748,151 A58,58 0 0 1 864,155 A72,72 0 0 1 1008,158 A46,46 0 0 1 1100,153 A60,60 0 0 1 1220,156 A42,42 0 0 1 1304,150 A64,64 0 0 1 1432,151 A48,48 0 0 1 1440,151 L1440,240 L0,240 Z" fill="url(#dwCloudFill)"/>
+</svg>
+        </div>
+    </main>
+
+    <!-- 🌟 YOUNG ILLUSTRATOR SPOTLIGHT -->
+    <section class="home-spotlight-section">
+        <div class="container">
+            <div id="homeSpotlight" hidden></div>
+        </div>
+    </section>
+
+    <!-- 🌟 INTRO & AUDIO SECTION -->
+    <section class="intro-section">
+        <div class="container">
+            <div class="story-card-glass">
+                <div class="audio-player-wrapper">
+                    <button class="play-pulse-btn" id="playAudioBtn">
+                        <i class="fa-solid fa-play"></i>
+                    </button>
+                </div>
+
+                <div class="intro-content">
+                    <span class="narrator-tag">🎙️ Narrated by Hind</span>
+                    <h2>A Warm Hello to Little Adventurers!</h2>
+                    <p>Welcome to <strong>DreamWings</strong>. Every story here is crafted to inspire kindness, creativity, and wonder. Hit the play button to hear my personal welcome message!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 📚 BOOK CLUB OF THE MONTH — centred between the welcome voice and how-it-works -->
+    <section class="home-club-section" id="dwBookClub" aria-labelledby="dwClubHeading">
+        <div class="container">
+            <div class="section-title-center">
+                <span class="home-club-tag"><i class="fa-solid fa-people-roof" aria-hidden="true"></i> Family Reading Community</span>
+                <h2 id="dwClubHeading">This Month's Book Club</h2>
+                <p>One story, one gentle question, one shared moment — every month.</p>
+            </div>
+
+            <article class="dw-club-banner home-club-card">
+                <div class="dw-club-cover">
+                    <img src="book-10.jfif" alt="Benny Bear &amp; The Sleepy Star — book cover" loading="lazy">
+                </div>
+
+                <div class="home-club-body">
+                    <span class="dw-club-badge">
+                        <i class="fa-solid fa-crown" aria-hidden="true"></i>
+                        <span>Featured Book of the Month</span>
+                    </span>
+
+                    <h3 class="dw-club-title">Benny Bear &amp; The Sleepy Star</h3>
+                    <p class="dw-club-desc">A heartwarming bedtime adventure about small acts of kindness, empathy, and learning that even the softest light can brighten someone's lonely night.</p>
+
+                    <div class="dw-moral-box">
+                        <h4><i class="fa-solid fa-seedling" aria-hidden="true"></i> This month's moral lesson</h4>
+                        <p>Kindness is never too small — even one warm blanket can comfort a lonely heart.</p>
+                    </div>
+
+                    <div class="dw-btn-row">
+                        <a href="book-club.html" class="dw-btn dw-btn-gold">
+                            <i class="fa-solid fa-users" aria-hidden="true"></i><span>Visit the Book Club</span>
+                        </a>
+                        <a href="reader.html?id=benny-bear-sleepy-star" class="dw-btn dw-btn-ghost">
+                            <i class="fa-solid fa-book-open" aria-hidden="true"></i><span>Read Book of the Month</span>
+                        </a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- 🏆 WEEKLY READING CHAMPIONS — moved here from the library page -->
+    <section class="home-champions-section" id="dwChampions" aria-labelledby="dwChampionsHeading">
+        <div class="container">
+            <div class="dw-card home-champions-panel">
+                <div class="dw-section-head">
+                    <div>
+                        <span class="dw-kicker"><i class="fa-solid fa-trophy" aria-hidden="true"></i> Weekly Reading Champions</span>
+                        <h2 class="dw-section-title" id="dwChampionsHeading">Our little heroes this week</h2>
+                        <p class="dw-section-sub">Finish a story, climb the stars, and collect a magical title.</p>
+                    </div>
+                    <a href="profile.html" class="dw-btn dw-btn-ghost"><i class="fa-solid fa-user-astronaut" aria-hidden="true"></i><span>My profile</span></a>
+                </div>
+                <div id="championsStrip"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🌟 HOW IT WORKS SECTION -->
+    <section class="how-it-works-section">
+        <div class="container">
+            <div class="section-title-center">
+                <h2>How DreamWings Works</h2>
+                <p>A simple and magical journey for parents and children</p>
+            </div>
+
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-icon"><i class="fa-solid fa-book-open"></i></div>
+                    <h3>Choose a Story</h3>
+                    <p>Browse our library filled with wonderful, hand-picked illustrated tales.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-icon"><i class="fa-solid fa-headphones-simple"></i></div>
+                    <h3>Listen & Read</h3>
+                    <p>Enjoy immersive reading combined with professional heartfelt voice narration.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-icon"><i class="fa-solid fa-heart"></i></div>
+                    <h3>Share the Joy</h3>
+                    <p>Save your favorite stories and create unforgettable bonding bedtime moments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 🌟 FOOTER -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-col">
+                <h3>DreamWings</h3>
+                <p>Magical stories narrated with love to inspire young hearts and minds.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="home.html">Home</a>
+                <a href="library.html">Library</a>
+                <a href="about.html">About Me</a>
+            </div>
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 DreamWings. All rights reserved. Designed with 🧡 by Hind.</p>
+        </div>
+    </footer>
+
+    <!-- GSAP & JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="home.script.js"></script>
+
+    <!-- 🌟 كود تتبع وحالة تسجيل الدخول (يرسم البروفايل أو زرار الـ Sign In بذكاء) -->
+    
+<script type="module" src="i18n.js"></script>
+<script type="module" src="auth-state.js"></script>
+    <script type="module" src="access-control.js"></script>
+    <script type="module" src="notifications.js"></script>
+    <script type="module" src="dw-hero.js"></script>
+    <script type="module" src="dw-champions.js"></script>
+    <script type="module">
+      import { renderSpotlight } from "./dw-spotlight.js";
+      const homeSpot = document.getElementById("homeSpotlight");
+      const paintSpotlight = () => { if (homeSpot) renderSpotlight(homeSpot); };
+      paintSpotlight();
+      window.addEventListener("dreamwings:language", paintSpotlight);
+    </script>
+</body>
+</html>

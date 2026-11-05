@@ -1,0 +1,585 @@
+/* ============================================================
+   DreamWings — Light theme
+   Dark is the default design. This file only restyles pages when
+   <html data-theme="light"> is set, using the soft white palette
+   of home.html (cream paper, white cards, deep red headings).
+   home.html never loads this file, so it stays identical in both
+   modes. The dark navbar and footer are kept in both themes.
+   ============================================================ */
+
+html[data-theme="light"] {
+  --dw-gold-500: #c2761d;
+  --dw-gold-400: #a8601f;
+  --dw-gold-300: #9a4d18;
+  --dw-gold-200: #7a3a24;
+  --dw-muted: #6e5e5b;
+  --dw-cream-100: #fcf7ee;
+  --dw-cream-200: #f3e7d6;
+  --dw-ink: #2d2422;
+  --dw-line: rgba(184, 59, 40, 0.16);
+  --dw-shadow: 0 16px 36px rgba(74, 40, 24, 0.10);
+
+  --bg-warm-hero: linear-gradient(180deg, #fffdf9 0%, #faf6f0 55%, #f4ebdf 100%);
+  --cream-bg: #faf6f0;
+  --text-dark: #2d2422;
+  --text-muted: #6e5e5b;
+  color-scheme: light;
+}
+
+html[data-theme="light"] body {
+  background: var(--bg-warm-hero) !important;
+  background-attachment: fixed;
+  color: #2d2422;
+}
+
+/* ------------------------------------------------------------
+   Typography
+   ------------------------------------------------------------ */
+
+html[data-theme="light"] .library-title,
+html[data-theme="light"] .dw-page-hero h1 {
+  color: #b83b28 !important;
+  text-shadow: 0 2px 10px rgba(184, 59, 40, 0.12) !important;
+}
+
+html[data-theme="light"] .library-subtitle,
+html[data-theme="light"] .dw-page-hero p,
+html[data-theme="light"] .dw-section-sub,
+html[data-theme="light"] .dw-help {
+  color: #6e5e5b !important;
+  text-shadow: none !important;
+}
+
+html[data-theme="light"] .dw-section-title,
+html[data-theme="light"] .shelf-header h2,
+html[data-theme="light"] .section-title,
+html[data-theme="light"] .comment-form-title,
+html[data-theme="light"] .art-title {
+  color: #8a3d22 !important;
+  text-shadow: none !important;
+}
+
+html[data-theme="light"] .dw-page-hero h1,
+html[data-theme="light"] .library-title { text-shadow: none !important; }
+
+/* ------------------------------------------------------------
+   Shared surfaces
+   ------------------------------------------------------------ */
+
+html[data-theme="light"] .dw-card,
+html[data-theme="light"] .dw-panel-card,
+html[data-theme="light"] .dw-club-section,
+html[data-theme="light"] .profile-badges-card,
+html[data-theme="light"] .profile-edit-card,
+html[data-theme="light"] .about-card-box,
+html[data-theme="light"] .contact-card,
+html[data-theme="light"] .contact-form-box,
+html[data-theme="light"] .comments-list-container,
+html[data-theme="light"] .art-card,
+html[data-theme="light"] .reader-panel,
+html[data-theme="light"] .book-studio,
+html[data-theme="light"] .profile-stat-card,
+html[data-theme="light"] .empty-favorites,
+html[data-theme="light"] .search-empty-box {
+  background: #ffffff !important;
+  border-color: #f0e4d8 !important;
+  box-shadow: 0 18px 38px rgba(74, 40, 24, 0.08) !important;
+  color: #2d2422 !important;
+}
+
+html[data-theme="light"] .about-card-box p,
+html[data-theme="light"] .contact-card p,
+html[data-theme="light"] .dw-section-sub,
+html[data-theme="light"] .badges-intro-text,
+html[data-theme="light"] .reader-panel p { color: #6e5e5b !important; }
+
+html[data-theme="light"] .dw-kicker {
+  background: rgba(184, 59, 40, 0.08);
+  border-color: rgba(184, 59, 40, 0.28);
+  color: #a8482f;
+}
+
+/* forms */
+html[data-theme="light"] .dw-input,
+html[data-theme="light"] .dw-select,
+html[data-theme="light"] .dw-textarea,
+html[data-theme="light"] .comment-form input,
+html[data-theme="light"] .comment-form textarea,
+html[data-theme="light"] .contact-form-box input,
+html[data-theme="light"] .contact-form-box textarea {
+  background: #fffdf9 !important;
+  border-color: #e8d9c9 !important;
+  color: #2d2422 !important;
+}
+
+html[data-theme="light"] .dw-input::placeholder,
+html[data-theme="light"] .dw-textarea::placeholder { color: #a2918a !important; }
+
+html[data-theme="light"] .dw-label { color: #8a3d22; }
+
+/* buttons */
+html[data-theme="light"] .dw-btn-ghost {
+  background: #fff !important;
+  border-color: rgba(184, 59, 40, 0.35) !important;
+  color: #a8482f !important;
+}
+
+html[data-theme="light"] .dw-btn-ghost:hover { background: #fdf3ea !important; }
+
+/* leaderboards, journals, spotlight */
+html[data-theme="light"] .dw-board-row {
+  background: #fdf6ee !important;
+  border-color: #f0e2d2 !important;
+}
+
+html[data-theme="light"] .dw-board-row.is-podium {
+  background: linear-gradient(120deg, rgba(245, 166, 35, 0.16), #fff8ef) !important;
+}
+
+html[data-theme="light"] .dw-board-name { color: #3a2a24 !important; }
+html[data-theme="light"] .dw-board-title { color: #a8601f !important; }
+html[data-theme="light"] .dw-board-score { color: #6b4a37 !important; }
+
+html[data-theme="light"] .dw-journal-entry,
+html[data-theme="light"] .dw-gratitude,
+html[data-theme="light"] .dw-spotlight,
+html[data-theme="light"] .dw-chip {
+  background: #fff8ee !important;
+  border-color: #f0e2d2 !important;
+  color: #4a3830 !important;
+}
+
+html[data-theme="light"] .dw-gratitude textarea { background: #fff; color: #2d2422; border-color: #e8d9c9; }
+
+/* certificate keeps its paper look but the toolbar follows the theme */
+html[data-theme="light"] .dw-cert-toolbar {
+  background: #fff !important;
+  border-color: #f0e4d8 !important;
+}
+html[data-theme="light"] .dw-cert-locked::after { background: rgba(250, 246, 240, 0.55) !important; }
+
+/* ------------------------------------------------------------
+   Library page
+   ------------------------------------------------------------ */
+
+html[data-theme="light"] .search-input-group {
+  background: #ffffff !important;
+  border-color: #f0e0cf !important;
+  box-shadow: 0 14px 30px rgba(74, 40, 24, 0.08);
+}
+
+html[data-theme="light"] .search-input-group input {
+  color: #2d2422 !important;
+  background: transparent !important;
+}
+
+html[data-theme="light"] .search-input-group input::placeholder { color: #a2918a !important; }
+
+html[data-theme="light"] .search-clear-btn,
+html[data-theme="light"] .search-voice-btn {
+  background: #f6ece0 !important;
+  color: #8a3d22 !important;
+}
+
+html[data-theme="light"] .filter-chip,
+html[data-theme="light"] .dw-suggest-chip {
+  background: #ffffff !important;
+  border-color: #ecdcc9 !important;
+  color: #6b4a37 !important;
+}
+
+html[data-theme="light"] .filter-chip:hover,
+html[data-theme="light"] .dw-suggest-chip:hover { border-color: rgba(184, 59, 40, 0.4) !important; }
+
+html[data-theme="light"] .filter-chip.active {
+  background: linear-gradient(135deg, #f7c46f, #e59849) !important;
+  color: #4a220f !important;
+  border-color: transparent !important;
+}
+
+html[data-theme="light"] .story-reading-note {
+  background: #fdf3e7 !important;
+  color: #6b4a37 !important;
+}
+
+html[data-theme="light"] .book-card-real,
+html[data-theme="light"] .book-card { color: #2d2422; }
+
+/* ------------------------------------------------------------
+   Gallery / about / contact fragments
+   ------------------------------------------------------------ */
+
+html[data-theme="light"] .comment-item {
+  background: #fdf7f0 !important;
+  border-color: #f0e4d8 !important;
+  color: #3a2a24 !important;
+}
+
+html[data-theme="light"] .contact-socials a {
+  background: #f6ece0 !important;
+  color: #a8482f !important;
+}
+
+html[data-theme="light"] .dw-gallery-grid figure,
+html[data-theme="light"] .gallery-item { border-color: #f0e4d8 !important; }
+
+html[data-theme="light"] .dw-lightbox { background: rgba(30, 18, 14, 0.92) !important; }
+
+/* ------------------------------------------------------------
+   Reader page
+   ------------------------------------------------------------ */
+
+html[data-theme="light"] body.dw-reader-page {
+  background: radial-gradient(ellipse at 50% 12%, #fffdf9 0%, #faf6f0 55%, #f2e8db 100%) !important;
+  color: #4a3830 !important;
+}
+
+html[data-theme="light"] .reader-panel { background: #fff !important; }
+html[data-theme="light"] .reader-story-text { color: #3a2a24 !important; }
+html[data-theme="light"] .story-video-wrap { background: #fff !important; border-color: #f0e4d8 !important; }
+
+/* ------------------------------------------------------------
+   Admin / studio panels
+   ------------------------------------------------------------ */
+
+html[data-theme="light"] .dw-admin-body { background: #f7f1e8 !important; }
+html[data-theme="light"] .dw-admin-side {
+  background: linear-gradient(180deg, #fffdf9, #f6ece1) !important;
+  border-color: #f0e4d8 !important;
+}
+html[data-theme="light"] .dw-admin-nav button { color: #6b4a37; }
+html[data-theme="light"] .dw-admin-nav button.is-active {
+  background: linear-gradient(135deg, #f7c46f, #e59849);
+  color: #4a220f;
+}
+html[data-theme="light"] .dw-admin-main { background: transparent; }
+html[data-theme="light"] .dw-lock { background: radial-gradient(ellipse at 50% 20%, #fdf3e7, #f6ece1 65%) !important; }
+html[data-theme="light"] .dw-lock-card {
+  background: #fff !important;
+  border-color: #f0e4d8 !important;
+  color: #2d2422 !important;
+}
+
+/* tables inside admin */
+html[data-theme="light"] table { color: #3a2a24; }
+html[data-theme="light"] th { color: #8a3d22; border-color: #f0e4d8; }
+html[data-theme="light"] td { border-color: #f4ebdf; }
+
+/* ------------------------------------------------------------
+   Motion
+   ------------------------------------------------------------ */
+
+html.dw-theme-anim body,
+html.dw-theme-anim .navbar,
+html.dw-theme-anim .dw-card,
+html.dw-theme-anim .dw-panel-card,
+html.dw-theme-anim .dw-btn,
+html.dw-theme-anim .dw-input,
+html.dw-theme-anim .dw-select,
+html.dw-theme-anim .dw-textarea,
+html.dw-theme-anim .filter-chip,
+html.dw-theme-anim .dw-suggest-chip,
+html.dw-theme-anim .search-input-group,
+html.dw-theme-anim .dw-board-row,
+html.dw-theme-anim .profile-badges-card,
+html.dw-theme-anim .profile-edit-card,
+html.dw-theme-anim .reader-panel,
+html.dw-theme-anim .theme-switch,
+html.dw-theme-anim .theme-option {
+  transition: background-color 0.35s ease, background 0.35s ease, color 0.35s ease,
+              border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.dw-theme-anim body,
+  html.dw-theme-anim * { transition: none !important; }
+}
+
+/* ------------------------------------------------------------
+   Toggle control (profile page)
+   ------------------------------------------------------------ */
+
+.theme-switch-card {
+  max-width: 900px;
+  margin: 0 auto 26px;
+  padding: 22px 26px;
+}
+
+.theme-switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.theme-switch-copy { flex: 1 1 320px; min-width: 0; }
+.theme-switch-copy .dw-section-title { margin: 8px 0 4px; }
+
+.theme-switch {
+  display: inline-flex;
+  gap: 6px;
+  padding: 6px;
+  border-radius: 999px;
+  border: 1px solid rgba(223, 162, 85, 0.4);
+  background: rgba(20, 13, 11, 0.55);
+}
+
+html[data-theme="light"] .theme-switch {
+  background: #f6ece0;
+  border-color: #e8d9c9;
+}
+
+.theme-option {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #d9c4b6;
+  font: 700 13.5px/1 "Quicksand", "Tajawal", sans-serif;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+
+html[data-theme="light"] .theme-option { color: #7a6a62; }
+
+.theme-option.is-active {
+  background: linear-gradient(135deg, #f7c46f, #e59849);
+  color: #3a1c0c;
+  box-shadow: 0 6px 16px rgba(197, 124, 32, 0.35);
+}
+
+.theme-option:focus-visible { outline: 2px solid #f5a623; outline-offset: 2px; }
+
+@media (max-width: 640px) {
+  .theme-switch-card { padding: 18px; }
+  .theme-switch { width: 100%; justify-content: space-between; }
+  .theme-option { flex: 1; justify-content: center; }
+}
+
+/* hero badge on library / profile */
+html[data-theme="light"] .hero-text-badge {
+  background: #fff !important;
+  border-color: rgba(184, 59, 40, 0.35) !important;
+  color: #a8482f !important;
+}
+
+/* reflection form + dashed inner panels */
+html[data-theme="light"] .dw-reflection-form {
+  background: #fdf7f0 !important;
+  border-color: #ecd9c4 !important;
+}
+
+/* gallery cards keep their artwork but get a light frame */
+html[data-theme="light"] .art-card,
+html[data-theme="light"] .gallery-card {
+  background: #ffffff !important;
+  border-color: #f0e4d8 !important;
+  box-shadow: 0 14px 30px rgba(74, 40, 24, 0.10) !important;
+}
+
+html[data-theme="light"] .art-card h3,
+html[data-theme="light"] .art-card p { color: #4a3830 !important; }
+
+/* profile stat / badge tiles */
+html[data-theme="light"] .badge-item,
+html[data-theme="light"] .profile-stat-card {
+  background: #fffdf9 !important;
+  border-color: #f0e4d8 !important;
+  color: #4a3830 !important;
+}
+
+html[data-theme="light"] .badge-item.unlocked {
+  background: linear-gradient(145deg, #fff6e6, #fdeed9) !important;
+  border-color: rgba(229, 152, 73, 0.55) !important;
+}
+
+html[data-theme="light"] .badge-item h4,
+html[data-theme="light"] .profile-stat-card h3 { color: #8a3d22 !important; }
+html[data-theme="light"] .badge-item p,
+html[data-theme="light"] .profile-stat-card p { color: #6e5e5b !important; }
+
+/* discussion questions + reflections */
+html[data-theme="light"] .dw-question-card,
+html[data-theme="light"] .dw-reflection-card,
+html[data-theme="light"] .dw-reflection-item {
+  background: #fdf7f0 !important;
+  border-color: #f0e4d8 !important;
+  color: #4a3830 !important;
+}
+
+/* empty-state text */
+html[data-theme="light"] .dw-results-empty,
+html[data-theme="light"] .dw-help { color: #8a7a72 !important; }
+
+/* ------------------------------------------------------------
+   Text that was tuned for dark cards but now sits on paper
+   ------------------------------------------------------------ */
+
+html[data-theme="light"] .art-title {
+  background: #fdf4e9 !important;
+  color: #8a3d22 !important;
+}
+
+html[data-theme="light"] .about-card-box p,
+html[data-theme="light"] .about-text p,
+html[data-theme="light"] .about-text p[style],
+html[data-theme="light"] .comments-list-container h3,
+html[data-theme="light"] .shelf-wrapper > p[style],
+html[data-theme="light"] .bookshelf-section p[style],
+html[data-theme="light"] .comment-form h2,
+html[data-theme="light"] .comment-form p,
+html[data-theme="light"] .rating-input-group span,
+html[data-theme="light"] .form-group label,
+html[data-theme="light"] .file-upload-label,
+html[data-theme="light"] .contact-info-cards h3,
+html[data-theme="light"] .contact-form-title { color: #4a3830 !important; }
+
+html[data-theme="light"] .rating-input-group span,
+html[data-theme="light"] .comment-form p,
+html[data-theme="light"] .about-card-box p,
+html[data-theme="light"] .about-text p,
+html[data-theme="light"] .about-text p[style],
+html[data-theme="light"] .shelf-wrapper > p[style],
+html[data-theme="light"] .bookshelf-section p[style] { color: #6e5e5b !important; }
+
+html[data-theme="light"] .form-input,
+html[data-theme="light"] .form-textarea {
+  background: #fffdf9 !important;
+  border-color: #e8d9c9 !important;
+  color: #2d2422 !important;
+}
+
+html[data-theme="light"] .comment-item p,
+html[data-theme="light"] .comment-item strong { color: #4a3830 !important; }
+
+/* badges + profile chips */
+html[data-theme="light"] .badges-header h2,
+html[data-theme="light"] .badge-title,
+html[data-theme="light"] .badges-intro-text { color: #6b3520 !important; }
+
+html[data-theme="light"] .badges-count-chip,
+html[data-theme="light"] .dw-cert-progress { color: #8a3d22 !important; }
+
+/* admin surfaces */
+html[data-theme="light"] .dw-panel-card h2,
+html[data-theme="light"] .dw-admin-top h1,
+html[data-theme="light"] .dw-mod-info strong,
+html[data-theme="light"] .dw-stat strong,
+html[data-theme="light"] .dw-lock-card h1,
+html[data-theme="light"] .dw-admin-user strong,
+html[data-theme="light"] .dw-avatar-title { color: #6b3520 !important; }
+
+html[data-theme="light"] .dw-stat i,
+html[data-theme="light"] .dw-lock-icon,
+html[data-theme="light"] .dw-results-empty i { color: #b3701f !important; }
+
+html[data-theme="light"] .dw-mini-btn {
+  background: #fdf3e7 !important;
+  border-color: #ecd9c4 !important;
+  color: #8a3d22 !important;
+}
+
+html[data-theme="light"] .dw-badge.wait {
+  background: #fdf3e7 !important;
+  color: #8a6118 !important;
+}
+
+/* club banner keeps its dark card, so no changes inside it */
+html[data-theme="light"] .dw-club-banner .dw-club-title { color: #fff0d4 !important; }
+
+/* the light toggle needs contrast on paper */
+html[data-theme="light"] .theme-option.is-active { color: #3a1c0c; }
+
+html[data-theme="light"] .dw-cert-lock-note {
+  background: #fdf3e7 !important;
+  border-color: #e8c9a0 !important;
+  color: #8a5a16 !important;
+}
+html[data-theme="light"] .dw-cert-lock-note a { color: #a8482f !important; }
+html[data-theme="light"] .dw-cert-note,
+html[data-theme="light"] .dw-cert-foot,
+html[data-theme="light"] .dw-cert-lead { color: #6e5e5b !important; }
+
+/* profile extras */
+html[data-theme="light"] .dw-panel-card h3,
+html[data-theme="light"] .dw-panel-card h3 span { color: #8a3d22 !important; }
+
+html[data-theme="light"] .avatar-choice {
+  background: #fff6ea !important;
+  color: #b3611f !important;
+  border-color: #ecd9c4 !important;
+}
+
+html[data-theme="light"] .avatar-choice.selected {
+  border-color: #e59849 !important;
+  box-shadow: 0 0 0 3px rgba(229, 152, 73, 0.28) !important;
+}
+
+html[data-theme="light"] .profile-edit-card input,
+html[data-theme="light"] .profile-edit-card .avatar-upload-label { color: #2d2422 !important; }
+
+html[data-theme="light"] .btn-logout {
+  background: #fff !important;
+  border-color: rgba(184, 59, 40, 0.35) !important;
+  color: #a8482f !important;
+}
+
+/* admin dashboard surfaces */
+html[data-theme="light"] .dw-stat {
+  background: #ffffff !important;
+  border-color: #f0e4d8 !important;
+  box-shadow: 0 12px 26px rgba(74, 40, 24, 0.08) !important;
+}
+html[data-theme="light"] .dw-stat strong { color: #6b3520 !important; }
+html[data-theme="light"] .dw-stat span { color: #7a6a62 !important; }
+
+html[data-theme="light"] .dw-admin-brand { color: #8a3d22 !important; }
+html[data-theme="light"] .dw-admin-user { background: #fdf3e7 !important; }
+html[data-theme="light"] .dw-admin-user strong { color: #6b3520 !important; }
+html[data-theme="light"] .dw-admin-user span,
+html[data-theme="light"] .dw-admin-user small { color: #7a6a62 !important; }
+html[data-theme="light"] .dw-admin-top p { color: #7a6a62 !important; }
+
+html[data-theme="light"] .dw-lock-card p,
+html[data-theme="light"] .dw-lock-card small { color: #6e5e5b !important; }
+
+/* reader page chrome */
+html[data-theme="light"] .heading h1 { color: #b83b28 !important; text-shadow: none !important; }
+html[data-theme="light"] .heading p,
+html[data-theme="light"] .status { color: #6e5e5b !important; }
+html[data-theme="light"] .heading span { color: #a8482f !important; letter-spacing: 2px; }
+
+/* category page */
+html[data-theme="light"] .back-link,
+html[data-theme="light"] .back-to-categories,
+html[data-theme="light"] a[href*="library.html"].category-back { color: #a8482f !important; }
+html[data-theme="light"] .shelf-empty,
+html[data-theme="light"] .category-empty,
+html[data-theme="light"] .search-empty-box p { color: #7a6a62 !important; }
+
+/* final contrast pass */
+html[data-theme="light"] .dw-muted { color: #7a6a62 !important; }
+html[data-theme="light"] .dw-cat-empty { color: #7a6a62 !important; }
+html[data-theme="light"] .auth-back-link { color: #a8482f !important; }
+html[data-theme="light"] .dw-results-count { color: #7a6a62 !important; }
+
+/* the navbar stays dark in both themes, so its buttons keep dark styling */
+html[data-theme="light"] .navbar .dw-btn-ghost,
+html[data-theme="light"] .navbar .dw-btn {
+  background: rgba(58, 36, 29, 0.72) !important;
+  color: #ffe9c2 !important;
+  border-color: rgba(223, 162, 85, 0.55) !important;
+}
+
+html[data-theme="light"] .navbar .back-link,
+html[data-theme="light"] .navbar .logo,
+html[data-theme="light"] .navbar .dw-mini-btn,
+html[data-theme="light"] .navbar .login-btn,
+html[data-theme="light"] .navbar .fav-btn { color: #ffe9c2; }
+
+/* admin/book-studio lock screen copy */
+html[data-theme="light"] #gateMessage { color: #6e5e5b !important; }

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en" data-lang-toggle="true">
+<head>
+    <script src="dw-theme.js"></script>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamWings | My Profile</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="library.style.css">
+    <link rel="stylesheet" href="reader-profile.css">
+    <link rel="stylesheet" href="dw-advanced.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="dw-logo.svg">
+<link rel="stylesheet" href="dw-theme.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar transparent-nav">
+        <div class="logo">
+            <div class="logo-icon-bg dw-logo-wrap"><img src="dw-logo.svg" alt="DreamWings" class="dw-logo-img"></div>
+            <span>DreamWings</span>
+        </div>
+
+        <nav class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="library.html">Library</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="about.html">About Me</a>
+            <a href="contact.html">Contact Us</a>
+        </nav>
+
+        <div class="nav-actions">
+            <a href="favorite.html" class="fav-btn" title="Favorites"
+               style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center">
+                <i class="fa-solid fa-star"></i>
+            </a>
+
+            <div id="auth-container" style="display: inline-flex; align-items: center;">
+                <a href="login.html" class="login-btn"
+                   style="text-decoration:none;display:inline-flex;align-items:center;gap:8px">
+                    <i class="fa-brands fa-google"></i><span>Sign In</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- PROFILE HERO -->
+    <section class="library-hero">
+        <div class="hero-content">
+            <div class="profile-avatar-wrapper">
+                <div id="profileHeroAvatar" class="profile-avatar-large"></div>
+            </div>
+
+            <h1 class="library-title" id="profileUserName">
+                Welcome, Hind! 🧡
+            </h1>
+
+            <div class="hero-text-badge" style="margin-top:10px">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                Master Story Explorer
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN PROFILE -->
+    <main class="bookshelf-section" style="padding-top:10px">
+
+        <!-- 🎨 APPEARANCE / THEME -->
+        <section class="dw-card theme-switch-card" aria-labelledby="themeSwitchTitle">
+            <div class="theme-switch-row">
+                <div class="theme-switch-copy">
+                    <span class="dw-kicker"><i class="fa-solid fa-palette" aria-hidden="true"></i> Appearance</span>
+                    <h2 class="dw-section-title" id="themeSwitchTitle">Reading theme</h2>
+                    <p class="dw-section-sub">Dark is the DreamWings default. Light mode uses the soft white palette of the home page.</p>
+                </div>
+                <div class="theme-switch" role="group" aria-label="Theme">
+                    <button type="button" class="theme-option" data-theme-set="dark" aria-pressed="true">
+                        <i class="fa-solid fa-moon" aria-hidden="true"></i><span>Dark</span>
+                    </button>
+                    <button type="button" class="theme-option" data-theme-set="light" aria-pressed="false">
+                        <i class="fa-solid fa-sun" aria-hidden="true"></i><span>Light</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+        <div class="container">
+
+            <!-- STATS -->
+            <div class="profile-stats-grid">
+                <div class="profile-stat-card">
+                    <i class="fa-solid fa-book-bookmark"></i>
+                    <h3 id="storiesReadCount">0</h3>
+                    <p>Stories Read</p>
+                </div>
+
+                <div class="profile-stat-card">
+                    <i class="fa-solid fa-star"></i>
+                    <h3 id="favoriteCount">0</h3>
+                    <p>Favorite Books</p>
+                </div>
+
+                <div class="profile-stat-card">
+                    <i class="fa-solid fa-headphones"></i>
+                    <h3 id="listeningTime">0 mins</h3>
+                    <p>Listening Time</p>
+                </div>
+
+                <div class="profile-stat-card">
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                    <h3 id="excellenceStars">0</h3>
+                    <p>Stars earned</p>
+                </div>
+            </div>
+
+            <!-- 🏆 BADGES & REWARDS SECTION -->
+            <section class="profile-badges-card">
+                <div class="badges-header">
+                    <h2>
+                        <i class="fa-solid fa-medal"></i>
+                        <span>Magical Badges & Achievements</span>
+                    </h2>
+                    <span class="badges-count-chip" id="badgesUnlockedCount">0 / 8 Unlocked</span>
+                </div>
+                <p class="badges-intro-text">
+                    Read stories, listen to wonderful adventures, and unlock magical badges for your journey!
+                </p>
+
+                <div class="badges-grid" id="profileBadgesGrid">
+                    <!-- Badges rendered dynamically by profile.js -->
+                </div>
+            </section>
+
+            <!-- 🎓 PRINTABLE READING CERTIFICATE PROMO BANNER -->
+            <div class="dw-panel-card" style="max-width:900px;margin:25px auto;background:linear-gradient(135deg,rgba(223,162,85,0.22),rgba(58,36,29,0.85));border-color:rgba(245,166,35,0.55);">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;">
+                    <div style="flex:1 1 300px;">
+                        <h3 style="margin:0 0 6px;color:#ffd88a;font-family:'Fredoka','Tajawal',sans-serif;font-size:1.25rem;display:flex;align-items:center;gap:10px;">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            <span>Reading Certificate of Achievement</span>
+                        </h3>
+                        <p style="margin:0;color:#dfcfc5;font-size:0.92rem;">
+                            Generate an official, printable diploma featuring your child's name to celebrate their reading journey!
+                        </p>
+                    </div>
+                    <a href="certificate.html" class="dw-btn dw-btn-gold" style="text-decoration:none;">
+                        <i class="fa-solid fa-print"></i> <span>Get My Certificate</span>
+                    </a>
+                </div>
+                <div class="dw-cert-progress" style="max-width:none;text-align:start;margin:16px 0 0;">
+                    <span id="profileCertText">Read 0 of 5 stories to unlock your certificate</span>
+                    <div class="dw-cert-progress-track">
+                        <div class="dw-cert-progress-fill" id="profileCertFill"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PERSONALIZE PROFILE -->
+            <section class="profile-edit-card">
+
+                <h2>
+                    <i class="fa-solid fa-user-pen"></i>
+                    Personalize your profile
+                </h2>
+
+                <div class="profile-edit-row" style="margin:18px 0">
+
+                    <div id="profileEditAvatar" class="profile-avatar-large"></div>
+
+                    <div>
+                        <label for="avatarUpload" class="avatar-upload-label">
+                            Choose Your Magical Picture
+                        </label>
+
+                        <input
+                            id="avatarUpload"
+                            type="file"
+                            accept="image/jpeg,image/png,image/webp"
+                        >
+
+                        <p class="studio-help">
+                            Choose a JPG, PNG, or WebP image (up to 5 MB).
+                        </p>
+                    </div>
+
+                </div>
+
+                <h3>Or choose a magical avatar</h3>
+
+                <div id="avatarChoices" class="profile-edit-row" style="margin:14px 0">
+
+                    <button type="button" class="avatar-choice" data-avatar="🦊">🦊</button>
+                    <button type="button" class="avatar-choice" data-avatar="🐻">🐻</button>
+                    <button type="button" class="avatar-choice" data-avatar="🦉">🦉</button>
+                    <button type="button" class="avatar-choice" data-avatar="🐱">🐱</button>
+                    <button type="button" class="avatar-choice" data-avatar="🦋">🦋</button>
+                    <button type="button" class="avatar-choice" data-avatar="🦄">🦄</button>
+                    <button type="button" class="avatar-choice" data-avatar="🐼">🐼</button>
+                    <button type="button" class="avatar-choice" data-avatar="🐰">🐰</button>
+
+                </div>
+
+                <p id="profileSaveStatus" class="studio-help" aria-live="polite"></p>
+
+            </section>
+
+            <!-- FAVORITES -->
+            <div class="shelf-wrapper" style="margin-top:60px">
+
+                <div class="shelf-header">
+                    <h2>
+                        <i class="fa-solid fa-star"></i>
+                        My Saved Favorites
+                    </h2>
+                </div>
+
+                <div class="shelf-grid" id="profileFavoritesGrid">
+                    <!-- Favorites are loaded from the signed-in user account -->
+                </div>
+
+                <div class="wooden-shelf-plank">
+                    <div class="wood-grain"></div>
+                </div>
+
+            </div>
+
+            <!-- MAGICAL CHARACTER CREATOR -->
+            <section class="dw-panel dw-profile-panel" style="max-width:900px;margin:0 auto 28px;">
+                <div id="avatarStudio"></div>
+            </section>
+
+            <!-- WEEKLY READING CHAMPIONS -->
+            <section class="dw-panel dw-profile-panel" style="max-width:900px;margin:0 auto 28px;">
+                <div class="dw-section-head">
+                    <div>
+                        <span class="dw-kicker"><i class="fa-solid fa-trophy"></i> Weekly Reading Champions</span>
+                        <h2 class="dw-section-title">This week's little heroes</h2>
+                        <p class="dw-section-sub">Every story you finish earns your place — and a new magical title.</p>
+                    </div>
+                    <span class="dw-pill" id="myRankChip">—</span>
+                </div>
+                <div id="profileLeaderboard"></div>
+            </section>
+
+            <!-- BEDTIME GRATITUDE JOURNAL -->
+            <section class="dw-panel dw-profile-panel" style="max-width:900px;margin:0 auto 28px;">
+                <div class="dw-section-head">
+                    <div>
+                        <span class="dw-kicker"><i class="fa-solid fa-book-heart"></i> Bedtime Gratitude Journal</span>
+                        <h2 class="dw-section-title">Little happy moments</h2>
+                        <p class="dw-section-sub">One gentle question after each story, kept safely in your archive.</p>
+                    </div>
+                </div>
+                <form id="journalForm" class="dw-reflection-form" novalidate>
+                    <div class="dw-field">
+                        <label class="dw-label" for="journalText">What was the best thing that happened to you today?</label>
+                        <textarea class="dw-textarea" id="journalText" rows="3" maxlength="600" placeholder="Today I felt happy because…"></textarea>
+                    </div>
+                    <div class="dw-btn-row">
+                        <button type="submit" class="dw-btn dw-btn-gold" id="journalSave">
+                            <i class="fa-solid fa-feather-pointed"></i><span>Save to my journal</span>
+                        </button>
+                        <span class="dw-inline-status" id="journalStatus" role="status"></span>
+                    </div>
+                </form>
+                <div class="dw-journal-list" id="journalList"></div>
+                <p class="dw-results-empty" id="journalEmpty" hidden>No entries yet — tonight is a lovely time to start 💛</p>
+            </section>
+
+            <!-- CREATOR TOOLS (visible to the platform owner only) -->
+            <div id="adminToolsCard" class="dw-panel-card dw-hidden" style="max-width:900px;margin:32px auto 0;text-align:center;">
+                <h2 style="justify-content:center;"><i class="fa-solid fa-wand-magic-sparkles"></i><span>Creator tools</span></h2>
+                <p>Manage your stories, gallery and monthly book club in one private place.</p>
+                <a href="admin.html" class="dw-btn dw-btn-gold" style="text-decoration:none;">
+                    <i class="fa-solid fa-lock-open"></i> <span>Open Admin Panel</span>
+                </a>
+                <p class="dw-help" style="margin-top:10px;">This area is for the platform creator only.</p>
+            </div>
+
+            <!-- LOGOUT -->
+            <div style="text-align:center;margin-top:50px">
+
+                <button onclick="handleLogout()" class="btn-logout">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Sign Out
+                </button>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+
+        <div class="container footer-content">
+
+            <div class="footer-col">
+                <h3>DreamWings</h3>
+                <p>Magical stories narrated with love to inspire young hearts and minds.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="home.html">Home</a>
+                <a href="library.html">Library</a>
+                <a href="about.html">About Me</a>
+            </div>
+
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2026 DreamWings. All rights reserved. Designed with 🧡 by Hind.</p>
+        </div>
+
+    </footer>
+
+    <script type="module" src="i18n.js"></script>
+<script type="module" src="profile.js"></script>
+    <script type="module" src="auth-state.js"></script>
+    <script type="module" src="favorites.js"></script>
+
+    <script type="module" src="notifications.js"></script>
+</body>
+</html>

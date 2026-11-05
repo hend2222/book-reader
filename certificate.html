@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="dw-theme.js"></script>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DreamWings | Reading Certificate of Achievement</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Cinzel:wght@600;700;800&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="library.style.css">
+    <link rel="stylesheet" href="reader-profile.css">
+    <link rel="stylesheet" href="dw-advanced.css">
+<link rel="icon" type="image/svg+xml" href="dw-logo.svg">
+<link rel="stylesheet" href="dw-theme.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar transparent-nav">
+        <div class="logo">
+            <div class="logo-icon-bg dw-logo-wrap"><img src="dw-logo.svg" alt="DreamWings" class="dw-logo-img"></div>
+            <span>DreamWings</span>
+        </div>
+
+        <nav class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="library.html">Library</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="about.html">About Me</a>
+            <a href="contact.html">Contact Us</a>
+        </nav>
+
+        <div class="nav-actions">
+            <a href="favorite.html" class="fav-btn" data-requires-auth="true" title="Favorites" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center;">
+                <i class="fa-solid fa-star"></i>
+            </a>
+
+            <div id="auth-container" style="display: inline-flex; align-items: center;">
+                <a href="login.html" class="login-btn" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px">
+                    <i class="fa-brands fa-google"></i><span>Sign In</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="dw-page-hero">
+        <div class="dw-page-hero-inner">
+            <span class="dw-kicker"><i class="fa-solid fa-graduation-cap"></i> Reader Honors &amp; Certificates</span>
+            <h1 class="library-title">Printable Reading Certificate 🎓</h1>
+            <p class="library-subtitle">Reward your child's magical reading accomplishments with an official personalized diploma to print and frame!</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <!-- CONTROLS -->
+        <div class="dw-cert-toolbar">
+            <div class="dw-field" style="flex:1 1 260px;margin:0;">
+                <label class="dw-label" for="certNameInput">Child's Name:</label>
+                <input class="dw-input" type="text" id="certNameInput" maxlength="40" placeholder="Enter child's name" autocomplete="off">
+            </div>
+            <div class="dw-btn-row" style="margin:0;">
+                <button type="button" class="dw-btn dw-btn-gold" id="certPrintBtn">
+                    <i class="fa-solid fa-print"></i><span>Print Certificate</span>
+                </button>
+                <button type="button" class="dw-btn dw-btn-ghost" id="certDownloadBtn">
+                    <i class="fa-solid fa-download"></i><span>Download Image</span>
+                </button>
+            </div>
+        </div>
+
+        <p class="dw-cert-lock-note" id="certLockNote" hidden>
+            <i class="fa-solid fa-lock"></i>
+            <span id="certLockText">Read a few more stories to unlock this certificate.</span>
+            <a href="library.html" id="certLockLink">Browse the Library</a>
+        </p>
+
+        <!-- PROGRESS -->
+        <div class="dw-cert-progress">
+            <span id="certProgressText">Read 0 of 5 stories to unlock your certificate</span>
+            <div class="dw-cert-progress-track">
+                <div class="dw-cert-progress-fill" id="certProgressFill"></div>
+            </div>
+        </div>
+
+        <!-- CERTIFICATE -->
+        <div class="dw-cert-shell">
+            <div class="dw-certificate" id="certSheet" dir="ltr">
+                <span class="dw-cert-corner tl"></span>
+                <span class="dw-cert-corner tr"></span>
+                <span class="dw-cert-corner bl"></span>
+                <span class="dw-cert-corner br"></span>
+
+                <div class="dw-cert-brand">
+                    <span class="dw-cert-logo"><i class="fa-solid fa-book-open"></i></span>
+                    <span>DreamWings Storybook Academy</span>
+                </div>
+
+                <h2 class="dw-cert-title">Certificate of Achievement</h2>
+                <p class="dw-cert-sub">For Inspiring Reading &amp; Imagination</p>
+                <p class="dw-cert-lead">This magical certificate is proudly presented to</p>
+                <div class="dw-cert-name" id="certDisplayName">Little Explorer</div>
+
+                <p class="dw-cert-body">
+                    In recognition of outstanding curiosity, dedication to bedtime stories, and opening their wings to explore wonderful tales of kindness, friendship, and courage.
+                </p>
+
+                <div class="dw-cert-stats">
+                    <i class="fa-solid fa-star"></i>
+                    <span id="certStoryCount">0 Stories completed</span>
+                </div>
+
+                <div class="dw-cert-foot">
+                    <div class="dw-cert-sig">
+                        <div class="dw-cert-sig-line">Hind</div>
+                        <div class="dw-cert-sig-label">Founder, DreamWings</div>
+                    </div>
+
+                    <div class="dw-cert-sig">
+                        <div class="dw-cert-sig-line" id="certDateDisplay">—</div>
+                        <div class="dw-cert-sig-label">Date Awarded</div>
+                    </div>
+
+                    <div class="dw-cert-seal">Magical<br>Excellence<br>Star</div>
+                </div>
+            </div>
+        </div>
+
+        <p class="dw-help" style="text-align:center;max-width:620px;margin:0 auto 60px;" id="certHint">
+            Tip: turn on “Background graphics” in your print settings for the full gold frame.
+        </p>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="footer-col">
+                <h3>DreamWings</h3>
+                <p>Magical stories narrated with love to inspire young hearts and minds.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <a href="home.html">Home</a>
+                <a href="library.html">Library</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="book-club.html">Book Club</a>
+                <a href="about.html">About Me</a>
+            </div>
+            <div class="footer-col">
+                <h4>Connect</h4>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 DreamWings. All rights reserved. Designed with 🧡 by Hind.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="i18n.js"></script>
+    <script type="module" src="auth-state.js"></script>
+    <script type="module" src="favorites.js"></script>
+    <script type="module" src="notifications.js"></script>
+    <script type="module" src="certificate.js"></script>
+</body>
+</html>

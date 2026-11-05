@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="dw-theme.js"></script>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+    <title>DreamWings | Create Account</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS File -->
+    <link rel="stylesheet" href="library.style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dw-theme.css">
+</head>
+<body class="auth-body">
+
+    <!-- Back to Home Button -->
+    <a href="home.html" class="auth-back-link"><i class="fa-solid fa-arrow-left"></i> Back to Home</a>
+
+   <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-logo-icon">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+            </div>
+            <h2>Join DreamWings! 🧡</h2>
+            <p class="auth-subtitle">Create an account to explore magical tales and save favorites.</p>
+
+            <form class="comment-form" onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <input type="text" id="signupName" placeholder="Full Name" class="form-input">
+                </div>
+
+                <div class="form-group">
+                    <input type="email" id="signupEmail" placeholder="Email Address" class="form-input">
+                </div>
+
+                <div class="form-group">
+                    <input type="password" id="signupPassword" placeholder="Create Password" class="form-input">
+                </div>
+
+                <button type="submit" class="btn-read-now" style="width: 100%; justify-content: center; margin-top: 10px;">
+                    <i class="fa-solid fa-user-plus"></i> Create Account
+                </button>
+            </form>
+
+            <p class="auth-switch-text">
+                Already have an account? <a href="login.html">Sign In</a>
+            </p>
+        </div>
+    </div>
+
+ 
+<script type="module" src="i18n.js"></script>
+<script type="module">
+import { auth, db } from "./firebase-config.js";
+import { showToast, queueToast } from "./notifications.js";
+import { createUserWithEmailAndPassword, sendEmailVerification, updateProfile, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+const form = document.querySelector(".auth-card form");
+if (form) form.addEventListener("submit", async event => {
+  event.preventDefault();
+  const nameInput = document.getElementById("signupName");
+  const emailInput = document.getElementById("signupEmail");
+  const passwordInput = document.getElementById("signupPassword");
+  const button = form.querySelector('[type="submit"]');
+  const name = nameInput.value.trim();
+  const email = emailInput.value.trim().toLowerCase();
+  const password = passwordInput.value;
+
+  if (name.length < 2) { showToast("Please enter a name with at least two characters.", "warning"); nameInput.focus(); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showToast("Please enter a valid email address.", "warning"); emailInput.focus(); return; }
+  const strongPassword = password.length >= 8 && /[A-Z]/.test(password) && /[a-z]/.test(password) && /[0-9]/.test(password);
+  if (!strongPassword) { showToast("Use at least 8 characters, including uppercase and lowercase letters and a number.", "warning"); passwordInput.focus(); return; }
+
+  if (button) { button.disabled = true; button.dataset.originalText = button.innerHTML; button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Creating account…'; }
+  try {
+    const { user } = await createUserWithEmailAndPassword(auth, email, password);
+    await updateProfile(user, { displayName: name });
+    await setDoc(doc(db, "users", user.uid), { username: name, displayName: name, email, profilePic: "", createdAt: serverTimestamp() }, { merge: true });
+    await sendEmailVerification(user);
+    await signOut(auth);
+    queueToast("Your account is ready. Please verify your email using the link we just sent, then sign in.", "success", "Welcome to DreamWings");
+    window.location.replace("login.html");
+  } catch (error) {
+    console.error("Sign-up error:", error);
+    const messages = {
+      "auth/email-already-in-use": "This email is already registered. Please sign in instead.",
+      "auth/invalid-email": "That email address does not look valid.",
+      "auth/weak-password": "Please choose a stronger password.",
+      "auth/operation-not-allowed": "Email and password sign-up is not enabled in Firebase.",
+      "auth/network-request-failed": "Connection issue. Check your internet and try again."
+    };
+    showToast(messages[error.code] || "We could not create your account. Please try again.", "error");
+  } finally {
+    if (button) { button.disabled = false; button.innerHTML = button.dataset.originalText || '<i class="fa-solid fa-user-plus"></i> Create Account'; }
+  }
+});
+</script>
+
+</body>
+</html>

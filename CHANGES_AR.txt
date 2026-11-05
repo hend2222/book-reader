@@ -1,0 +1,32 @@
+DREAMWINGS — ملخّص التعديلات (نسخة v8)
+
+1) زرار اللغة (عربي / إنجليزي)
+- ملف جديد: i18n.js  (قاموس مركزي + تخزين الاختيار + تحويل الاتجاه RTL)
+- الزرار بيظهر في صفحة الهوم وصفحة البروفايل فقط، وشكله كبسولة ذهبية بحرّاك.
+- الإنجليزي هو الأساسي. الاختيار محفوظ في localStorage باسم dreamwings:lang
+  وبيتطبّق على كل الصفحات (12 صفحة) مش صفحة وصفحة.
+- عند العربي: <html dir="rtl" lang="ar"> + خط Tajawal + محاذاة يمين.
+- الصفحات المربوط فيها: home, library, about, contact, login, signup,
+  profile, favorite, reader, category, category-fantasy, book-studio.
+- النصوص اللي بتتولد من الجافاسكريبت (رسائل، أزرار الأدمن، حالات القراءة)
+  بتترجم أيضاً عن طريق window.dwT().
+
+2) إحصائيات البروفايل — بقت حقيقية ومترابطة
+- Stories Read: reader.js بيحفظ الـ bookId في users/{uid}.readBooks
+  (arrayUnion) + نسخة محلية dreamwings:read:{uid}
+- Favorite Books: نفس ليستة dreamwings:favorites:{uid} اللي بتُرسم في
+  صفحة المفضلة والبروفايل + مزامنة users/{uid}.favoriteBooks
+- Listening Time: بتُحسب من تشغيل السرد الصوتي الحقيقي (دقيقة بدقيقة)
+  dreamwings:listening:{uid} + users/{uid}.listeningMinutes
+- الأرقام بتتحدّث لحظياً (favorites-changed / language / focus / storage)
+  ومفيش أي رقم ثابت في الصفحة.
+
+3) إصلاحات
+- book-reader.js: كان فيه سطر تعليق مكسور بيوقف الملف — اتصلّح.
+- library.script.js و auth-state.js: النصوص بقت من القاموس بدل عربي ثابت.
+
+مطلوب منك في Firebase (المشروع dreamwings-2777e):
+- الـ rules الحالية بتسمح للمستخدم بكتابة users/{uid} بتاعه — وده المطلوب
+  لحفظ readBooks و favoriteBooks و listeningMinutes. لو مقيّدة، انشري
+  rules الموجودة في FIREBASE_RULES_SETUP.txt مع سطر users.
+- مفيش تغيير في Supabase function (upload-book) ولا EmailJS — كلهم زي ما هما.
